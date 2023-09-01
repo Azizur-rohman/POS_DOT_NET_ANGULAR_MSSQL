@@ -1,0 +1,87 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Product</strong> <small>Add</small>
+        </c-card-header>
+        <c-card-body>
+          <form
+          [id]="formId"
+          [formGroup]="productForm"
+          (ngSubmit)="onSaveConfirmation()"
+          autocomplete="off"
+        >
+          <c-row>
+            <c-col xs="4">
+                Name <span style="color: red;">*</span>
+              <input cFormControl type="text" formControlName="name" placeholder="Product name..." required 
+              [ngClass]="{'red-border': f.name.invalid && (f.name.dirty || f.name.touched)}"/>
+              <br>
+              <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">
+                <div *ngIf="f.name.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Product Name is required!!!</div>
+              </div>
+          </c-col>
+          <c-col xs="4">
+              Category <span style="color: red;">*</span>
+            <select formControlName="category" cSelect required 
+            [ngClass]="{'red-border': f.category.invalid && (f.category.dirty || f.category.touched)}">
+                <option *ngFor="let option of categoryList" [value]="option.category_code">{{ option.name }}</option>
+            </select>
+            <br>
+            <div *ngIf="f.category.invalid && (f.category.dirty || f.category.touched)">
+              <div *ngIf="f.category.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Category Select is required!!!</div>
+            </div>
+        </c-col>
+          <c-col xs="4">
+              Image
+            <input cFormControl formControlName="file" type="file" (change)="onFileSelected($event)" />
+            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 50px; width: 50px; margin-left: 30%; margin-top: 5px;"/>
+            <br>
+        </c-col>
+        <c-col xs="4">
+              Price <span style="color: red;">*</span>
+            <input cFormControl type="number" formControlName="price" style="text-align: end;" min=1 oninput="validity.valid||(value='');" required 
+            [ngClass]="{'red-border': f.price.invalid && (f.price.dirty || f.price.touched)}"/>
+            <br>
+            <div *ngIf="f.price.invalid && (f.price.dirty || f.price.touched)">
+              <div *ngIf="f.price.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Price is required!!!</div>
+            </div>
+        </c-col>
+          </c-row>
+          <c-row >
+            <c-col xs="3">
+              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add More</button>
+            </c-col>
+          </c-row>
+        </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <mat-card class="mat-card-gap"  *ngIf="!paramId">
+    <table class="report-table">
+      <tr>
+        <th style="text-align: center; width: 4%;">Srl #</th>
+        <th style="text-align: center;">Product</th>
+        <th style="text-align: center;">Category</th>
+        <th style="text-align: center;">Image</th>
+        <th style="text-align: center;">Price</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+      <tr *ngFor="let item of itemArray; let i = index">
+        <td style="text-align: center;">{{ i + 1 }}</td>
+        <td>{{ item.name}}</td>
+        <td style="text-align: center;">{{ categoryName}}</td>
+        <td style="text-align: center;"><img [src]="item.image" style="height: 50px; width: 50px;" /></td>
+        <td style="text-align: right">{{ item.price | number }}</td>
+        <td style="text-align: center">
+          <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
+            >cancel</mat-icon
+          >
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  
+  

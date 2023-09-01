@@ -1,0 +1,107 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Stock Management</strong> <small>Add</small>
+        </c-card-header>
+        <c-card-body>
+          <form
+          [id]="formId"
+          [formGroup]="stockManagementForm"
+          (ngSubmit)="onSaveConfirmation()"
+          autocomplete="off"
+        >
+          <c-row>
+            <c-col xs="4">
+                  Category <span style="color: red;">*</span>
+                <select formControlName="category" cSelect (change)="onSelectCategory($event)" required 
+                [ngClass]="{'red-border': f.category.invalid && (f.category.dirty || f.category.touched)}">
+                    <option value="" disabled>--Select Category--</option>
+                    <option [disabled]="paramId != null" *ngFor="let option of categoryList" [value]="option.category_code">{{ option.name }}</option>
+                </select>
+                <br>
+                <div *ngIf="f.category.invalid && (f.category.dirty || f.category.touched)">
+                  <div *ngIf="f.category.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Category Select is required!!!</div>
+                </div>
+            </c-col>
+          <c-col xs="4">
+              Product <span style="color: red;">*</span>
+            <select formControlName="product" cSelect (change)="onSelectProduct($event)" required 
+            [ngClass]="{'red-border': f.product.invalid && (f.product.dirty || f.product.touched)}">
+              <!-- <option value="" disabled>--Select Product--</option> -->
+                <option *ngFor="let option of productList" [value]="option.product_code" [disabled]="paramId != null">{{ option.name }}</option>
+            </select>
+            <br>
+            <div *ngIf="f.product.invalid && (f.product.dirty || f.product.touched)">
+              <div *ngIf="f.product.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Product Select is required!!!</div>
+            </div>
+        </c-col>
+          <c-col xs="4" style="text-align: center;">
+              Image
+            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 50px; width: 50px;"/>
+            <br>
+        </c-col>
+        <c-col xs="4">
+              Product Price
+            <input cFormControl type="number" formControlName="product_price" readonly/>
+        </c-col>
+        <c-col xs="4">
+              Sale Price <span style="color: red;">*</span>
+            <input cFormControl type="number" formControlName="salePrice" style="text-align: end;" min=1 oninput="validity.valid||(value='');" required 
+            [ngClass]="{'red-border': f.salePrice.invalid && (f.salePrice.dirty || f.salePrice.touched)}"/>
+            <br>
+            <div *ngIf="f.salePrice.invalid && (f.salePrice.dirty || f.salePrice.touched)">
+              <div *ngIf="f.salePrice.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Sale Price is required!!!</div>
+            </div>
+        </c-col>
+        <c-col xs="4">
+              Quantity <span style="color: red;">*</span>
+            <input cFormControl type="number" formControlName="quantity" min=1 oninput="validity.valid||(value='');" required 
+            [ngClass]="{'red-border': f.quantity.invalid && (f.quantity.dirty || f.quantity.touched)}"/>
+            <br>
+            <div *ngIf="f.quantity.invalid && (f.quantity.dirty || f.quantity.touched)">
+              <div *ngIf="f.quantity.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Quantity is required!!!</div>
+            </div>
+        </c-col>
+          </c-row>
+          <c-row >
+            <c-col xs="3">
+              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add More</button>
+            </c-col>
+          </c-row>
+        </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <mat-card class="mat-card-gap"  *ngIf="!paramId">
+    <table class="report-table">
+      <tr>
+        <th style="text-align: center; width: 4%;">Srl #</th>
+        <th style="text-align: center;">Product</th>
+        <th style="text-align: center;">Category</th>
+        <th style="text-align: center;">Image</th>
+        <th style="text-align: center;">Product Price</th>
+        <th style="text-align: center;">Sale Price</th>
+        <th style="text-align: center;">Quantity</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+      <tr *ngFor="let item of itemArray; let i = index">
+        <td style="text-align: center;">{{ i + 1 }}</td>
+        <td>{{ item.name}}</td>
+        <td style="text-align: center;">{{ categoryName}}</td>
+        <td style="text-align: center;"><img [src]="item.image" style="height: 50px; width: 50px;" /></td>
+        <td style="text-align: right">{{ item.product_price | number }}</td>
+        <td style="text-align: right">{{ item.salePrice | number }}</td>
+        <td style="text-align: center">{{ item.quantity | number }}</td>
+        <td style="text-align: center">
+          <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
+            >cancel</mat-icon
+          >
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  
+  

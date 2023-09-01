@@ -1,0 +1,55 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>User Category</strong> <small>Add</small>
+        </c-card-header>
+        <c-card-body>
+          <form
+          [id]="formId"
+          [formGroup]="usercategoryForm"
+          (ngSubmit)="onSaveConfirmation()"
+          autocomplete="off"
+        >
+          <c-row>
+            <c-col xs="6">
+                User Category <span style="color: red;">*</span>
+              <input cFormControl type="text" formControlName="userCategoryName" placeholder="User Category name..." required 
+              [ngClass]="{'red-border': f.userCategoryName.invalid && (f.userCategoryName.dirty || f.userCategoryName.touched)}"/>
+              <br>
+              <div *ngIf="f.userCategoryName.invalid && (f.userCategoryName.dirty || f.userCategoryName.touched)">
+                <div *ngIf="f.userCategoryName.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User Category Name is required!!!</div>
+              </div>
+          </c-col>
+          </c-row>
+          <c-row >
+            <c-col xs="3">
+              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add More</button>
+            </c-col>
+          </c-row>
+        </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <mat-card class="mat-card-gap"  *ngIf="!paramId">
+    <table class="report-table">
+      <tr>
+        <th style="text-align: center;">Srl #</th>
+        <th style="text-align: center;">Category</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+      <tr *ngFor="let item of itemArray; let i = index">
+        <td style="text-align: center;">{{ i + 1 }}</td>
+        <td>{{ item.userCategoryName }}</td>
+        <td style="text-align: center">
+          <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
+            >cancel</mat-icon
+          >
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  
+  

@@ -1,0 +1,151 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Order</strong> <small>Add</small>
+        </c-card-header>
+        <c-card-body>
+          <form
+          [id]="formId"
+          [formGroup]="saleForm"
+          (ngSubmit)="onSaveConfirmation()"
+          autocomplete="off"
+        >
+        <c-row>
+            <c-col xs="12">
+                <h3 style="font-weight: bold;"><span style="font-weight:400;">Order No: </span>#{{orderNo}}</h3>
+            </c-col>
+        </c-row>
+          <c-row>
+            <c-col xs="4">
+                Customer Name <span style="color: red;">*</span>
+              <input cFormControl type="text" formControlName="customerName" placeholder="Customer name..." required 
+              [ngClass]="{'red-border': f.customerName.invalid && (f.customerName.dirty || f.customerName.touched)}"/>
+              <br>
+              <div *ngIf="f.customerName.invalid && (f.customerName.dirty || f.customerName.touched)">
+                <div *ngIf="f.customerName.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Customer Name is required!!!</div>
+              </div>
+          </c-col>
+          <c-col xs="4">
+              Customer Phone No.
+            <input cFormControl type="text" formControlName="customerPhone" placeholder="Customer Phone No..."/>
+        </c-col>
+        <c-col xs="4">
+              Customer Address
+            <input cFormControl type="text" formControlName="customerAddress" placeholder="Customer Address..."/>
+        </c-col>
+          </c-row>
+        </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <mat-card class="mat-card-gap">
+    <div>
+        <table>
+            <thead>
+                <th class="srl">Srl #</th>
+                <th class="desc">Product</th>
+                <th class="desc">Category</th>
+                <th class="code"> Sale Price</th>
+                <th class="code">Quantity</th>
+                <th class="desc">Sub Total</th>
+                <th></th>
+            </thead>
+
+            <tr *ngFor="let sal of saleDtlHeadArr; let i = index">
+                <td style="text-align: center;">
+                    {{sal.serial_no}}
+                </td>
+                <td>
+                    <select cSelect [(ngModel)]="sal.productCode" (change)="onSelectSaleDetail($event, i)">
+                        <option *ngFor="let sal of productList" [disabled]="sal.isDisable" [value]="sal.productCode">
+                            {{ sal.product}}
+                        </option>                    
+                    </select>
+                </td>
+                <td style="text-align: center;">
+                    {{sal.categoryName}}
+                </td>
+                <td>
+                    <input cFormControl style="text-align: end;" type="number" min=1 oninput="validity.valid||(value='');" autocomplete="off" [(ngModel)]="sal.salePrice" (input)="salePrice(i)">
+                </td>
+                <td>
+                    <input cFormControl type="number" style="text-align: end;" min=1 [max]="sal.maxQuantity" oninput="validity.valid||([value]='sal.maxQuantity');" [(ngModel)]="sal.quantity" (input)="quantity(i)"/>
+                </td>
+                <td style="text-align: end;">
+                    {{sal.subTotalAmount}}
+                </td>
+                <td style="text-align: center;">
+                    <button *ngIf="!paramId || sal.id == 0" class="delete-record-btn" mat-icon-button [disabled]="isSalBtnOff" (click)="removeSaleDetailGroup(sal, i)">
+                    <mat-icon>clear</mat-icon>
+                    </button>
+                    <button *ngIf="paramId && sal.id > 0" class="delete-record-btn" mat-icon-button (click)="onDeleteConfirmation(sal,i)">
+                    <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </td>
+            </tr>
+
+            <tr style="font-weight: bold;">
+                <td colspan="5" style="padding-top: 10px; padding-bottom: 10px; text-align: end;">Total</td>
+                <td style="text-align: end;">{{ sumTotalAmount() | number }}</td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
+        <button class="btn-light-blue" type="button" mat-raised-button (click)="addSaleDetailGroup()">
+      <mat-icon>add</mat-icon> Add More
+    </button>
+    <br>
+    <div>
+      <form
+      [id]="formId"
+      [formGroup]="saleForm"
+      (ngSubmit)="onSaveConfirmation()"
+      autocomplete="off"
+    >
+      <c-row>
+        <c-col xs="7">
+        </c-col>
+          <c-col xs="2" style="text-align: end; margin-top: 10px; font-weight: 500;"> Discount (<span style="color: red;">%</span>):
+          </c-col>
+          <c-col xs="2">
+            <input cFormControl type="number" formControlName="discount" style="text-align: end;" min=0 max=100 oninput="validity.valid||(value='100');" (input)="discount()">
+          </c-col>
+          <c-col xs="1" style="margin-top: 10px;">
+            BDT 
+          </c-col>
+      </c-row>
+      <br>
+      <c-row>
+        <c-col xs="7">
+        </c-col>
+          <c-col xs="2" style="text-align: end; margin-top: 10px; font-weight: 500;"> Vat (<span style="color: red;">%</span>):
+          </c-col>
+          <c-col xs="2">
+            <input cFormControl type="number" formControlName="vat" style=" text-align: end;" min=0 max=100 oninput="validity.valid||(value='100');" (input)="vat()">
+          </c-col>
+          <c-col xs="1" style="margin-top: 10px;">
+            BDT 
+          </c-col>
+      </c-row>
+      <br>
+      <c-row>
+        <c-col xs="7">
+        </c-col>
+          <c-col xs="2" style="text-align: end; margin-top: 10px; font-weight: 500;"> Grand Total:
+          </c-col>
+          <c-col xs="2" style="margin-top: 10px; font-weight: 600; text-align: end;">
+             <p ><input formControlName="grandTotalAmount" [(ngModel)]="totalAmount" hidden="true"/><input formControlName="totalAmount" [(ngModel)]="total" hidden="true"/>{{totalAmount | number}}</p>
+          </c-col>
+          <c-col xs="1" style="margin-top: 10px;">
+            BDT 
+          </c-col>
+      </c-row>
+      </form>
+    </div>
+    </div>
+</mat-card>
+  
+  

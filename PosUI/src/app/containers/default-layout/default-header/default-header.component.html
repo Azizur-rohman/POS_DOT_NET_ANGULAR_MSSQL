@@ -1,0 +1,243 @@
+<!--<c-header class="mb-4 d-print-none" position="sticky">-->
+<ng-container style="height: 20px;">
+  <c-container [fluid]="true">
+    <button
+      toggle="visible"
+      cHeaderToggler
+      [cSidebarToggle]="sidebarId"
+      class="ps-1"
+    >
+      <svg cIcon
+        name="cilMenu"
+        size="lg"
+      ></svg>
+    </button>
+    <c-header-nav class="d-none d-lg-flex me-auto">
+      <c-nav-item>
+        <a cNavLink routerLink="/dashboard" routerLinkActive="active">
+          Dashboard
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a cNavLink routerLink="/users" routerLinkActive="active">Users</a>
+      </c-nav-item>
+      <c-nav-item>
+        <a cNavLink routerLink="/settings" routerLinkActive="active">
+          Settings
+        </a>
+      </c-nav-item>
+    </c-header-nav>
+
+    <!-- <c-header-nav style="transform: translateX(70%); z-index: 999999;">
+  <div class="container">
+    <div style="text-align: center; margin-top: -22px; transform: translateY(83px); position: relative; z-index: 99999999;" class="alert alert-success" *ngIf="successMessage$ | async as successMessage">{{ successMessage }}</div>
+    <div style="text-align: center; margin-top: -22px; transform: translateY(83px); position: relative; z-index: 99999999;" class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">{{ errorMessage }}</div>
+  </div>
+    </c-header-nav> -->
+
+    <c-header-nav class="d-none d-lg-flex">
+      <c-nav-item>
+        <a routerLink="./" cNavLink>
+          <svg cIcon name="cilBell" size="lg"></svg>
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="./" cNavLink>
+          <svg cIcon name="cilList" size="lg"></svg>
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a routerLink="./" cNavLink>
+          <svg cIcon name="cilEnvelopeOpen" size="lg"></svg>
+        </a>
+      </c-nav-item>
+    </c-header-nav>
+    <c-header-nav class="ms-3">
+      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+    </c-header-nav>
+
+  </c-container>
+  
+  <mat-progress-bar *ngIf="loaderService.isLoading | async" style=" transform: translateY(12px);" class="card-header-progress"  mode="indeterminate">
+  </mat-progress-bar>
+  <c-header-divider></c-header-divider>
+  <c-container [fluid]="true" style="background-color: rgb(180, 246, 248);">
+    <div style="float: left; transform: translateY(10px); position: relative">
+      <mat-icon>account_balance</mat-icon>
+      <h3 style="text-align: center; padding-left: 5px; float: right; z-index: 99999999999; position: relative">{{uiInfo?.title}}</h3>
+    </div>
+    <div style="float: right;" fxLayoutGap="20px">
+      <div *ngIf="uiInfo" class="nav-ui-actions">
+        <!-- <ng-container *ngTemplateOutlet="uiInfo?.additionalComponent"></ng-container> -->
+
+        <button [disabled]="isLoading" type="button" *ngIf="uiInfo.draft" mat-icon-button color="accent"
+          matTooltip="Save As Draft" (click)="uiInfo.draft()">
+          <mat-icon>tab</mat-icon>
+        </button>
+        <a [routerLink]="[uiInfo.editPath]" *ngIf="uiInfo.editPath" mat-icon-button matTooltip="Edit"
+          matTooltipClass="tooltip">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <!-- [routerLink]="[uiInfo?.goBackPath]" -->
+        <a (click)="goBackToPath()" *ngIf="uiInfo.goBackPath" mat-icon-button matTooltip="Go Back"
+          matTooltipClass="tooltip">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+
+        <a *ngIf="uiInfo.goBack" mat-icon-button matTooltip="Back" matTooltipClass="tooltip"
+          (click)="uiInfo.goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        <a *ngIf="uiInfo.goNext" mat-icon-button matTooltip="Next" matTooltipClass="tooltip"
+          (click)="uiInfo.goNext()">
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
+        <button type="button" *ngIf="uiInfo.qrcode" mat-icon-button color="accent" matTooltip="Print All QR"
+          matTooltipClass="tooltip" (click)="uiInfo.qrcode()">
+          <img src="../../../../assets/images/qr1.png" alt="qr-code" height="20px" width="20px" />
+        </button>
+        <!-- [routerLink]="[uiInfo?.refreshPath]" -->              
+        <a (click)="refreshPathViaHome()" *ngIf="uiInfo.refreshPath" mat-icon-button matTooltip="Refresh"
+          matTooltipClass="tooltip">
+          <mat-icon>refresh</mat-icon>
+        </a>
+        <button type="button" *ngIf="uiInfo.refresh" mat-icon-button color="accent" matTooltip="Refresh"
+          matTooltipClass="tooltip" (click)="uiInfo.refresh()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <a [routerLink]="[uiInfo.addNewPath]" *ngIf="uiInfo.addNewPath" mat-icon-button matTooltip="Add New"
+          matTooltipClass="tooltip" color="primary">
+          <mat-icon>add_box</mat-icon>
+        </a>
+        <a [routerLink]="[uiInfo.viewNewPath]" *ngIf="uiInfo.viewNewPath" mat-icon-button matTooltip="View"
+        matTooltipClass="tooltip" color="primary">
+        <mat-icon>preview</mat-icon>
+      </a>
+
+        <button type="button" *ngIf="uiInfo.addNew" mat-icon-button color="primary" matTooltip="Add New"
+          matTooltipClass="tooltip" (click)="uiInfo.addNew()">
+          <mat-icon>add_box</mat-icon>
+        </button>
+        <button (click)="refreshPathViaHome()" type="button" [attr.form]="uiInfo.formId" *ngIf="uiInfo.formId"
+          mat-icon-button color="warn" matTooltip="Reset" matTooltipClass="tooltip">
+          <mat-icon>cancel</mat-icon>
+        </button>
+        <button type="submit" [attr.form]="uiInfo.formId" *ngIf="uiInfo.formId"
+          mat-icon-button matTooltip="Save Changes" matTooltipClass="tooltip">
+          <mat-icon style="color: forestgreen;">save</mat-icon>
+        </button>
+        <button [disabled]="isLoading" type="button" *ngIf="uiInfo.submitAll" mat-icon-button color="accent"
+          matTooltip="Submit" matTooltipClass="tooltip" (click)="uiInfo.submitAll()">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+  </c-container>
+</ng-container>
+<!--</c-header>-->
+
+<ng-template #userDropdown>
+  <c-dropdown alignment="end" variant="nav-item">
+    <button
+      cButton
+      color=""
+      [caret]="false"
+      cDropdownToggle
+      class="py-0"
+      style="border-radius: 100%;"
+    >
+    <!-- <img style="height: 40px; width: 40px; border-radius: 40px;"  src="./assets/images/Aziz_photos.jpg"> -->
+      <c-avatar
+        status="success"
+      >
+      <img style="height: 40px; width: 40px; border-radius: 40px;"  src="./assets/images/Aziz_photos.jpg">
+      </c-avatar>
+    </button>
+    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+      <li>
+        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilBell"></svg>
+          Updates
+          <c-badge class="ms-2 float-end" color="info">
+            42
+          </c-badge>
+        </a>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilEnvelopeOpen"></svg>
+          Messages
+          <c-badge class="ms-2 float-end" color="success">
+            42
+          </c-badge>
+        </a>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilTask"></svg>
+          Tasks
+          <c-badge class="ms-2 float-end" color="danger">
+            42
+          </c-badge>
+        </a>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name='cilCommentSquare'></svg>
+          Comments
+          <c-badge class="ms-auto" color="warning">
+            42
+          </c-badge>
+        </a>
+      </li>
+      <li>
+        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Settings</h6>
+      </li>
+      <li></li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilUser"></svg>
+          Profile
+        </a>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilSettings"></svg>
+          Settings
+        </a>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilCreditCard"></svg>
+          Payments
+          <c-badge class="ms-2 float-end" color="secondary">
+            42
+          </c-badge>
+        </a>
+      </li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilFile"></svg>
+          Projects
+          <c-badge class="ms-2 float-end" color="primary">
+            42
+          </c-badge>
+        </a>
+      </li>
+      <li>
+        <hr cDropdownDivider/>
+      </li>
+      <li>
+        <a routerLink="./" (click)="logout()" cDropdownItem>
+          <svg cIcon class="me-2" name="cilLockLocked"></svg>
+          Logout
+        </a>
+      </li>
+      <li></li>
+    </ul>
+  </c-dropdown>
+</ng-template>
+

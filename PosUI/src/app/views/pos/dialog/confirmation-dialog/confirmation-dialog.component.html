@@ -1,0 +1,20 @@
+   <mat-card class="confirmDialog">
+   <h1 mat-dialog-title>{{ data.title }}</h1>
+
+   <mat-dialog-content style="color: rgb(65, 65, 65);" [innerHTML]="data.content"></mat-dialog-content>
+
+   <mat-dialog-actions *ngIf="!data?.disableActionButtons" fxLayoutAlign="end">
+     <button
+       mat-raised-button
+       [mat-dialog-close]="true"
+       style="background-color: forestgreen;"
+       class="white-text"
+       [disabled]="loaderService.isLoading | async"
+     >
+       {{ data.confirmButtonText || 'YES' }}
+     </button>
+     <button mat-raised-button [mat-dialog-close]="false" class="white-text" style="background-color: red;">
+       {{ data.cancelButtonText || 'NO' }}
+     </button>
+   </mat-dialog-actions>
+</mat-card>

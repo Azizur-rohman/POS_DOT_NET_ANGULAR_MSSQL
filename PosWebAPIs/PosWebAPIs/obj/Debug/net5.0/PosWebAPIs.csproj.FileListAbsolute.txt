@@ -1,0 +1,118 @@
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\appsettings.Development.json
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\appsettings.json
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.exe
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.deps.json
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.runtimeconfig.json
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.runtimeconfig.dev.json
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\ref\PosWebAPIs.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.pdb
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.csproj.AssemblyReference.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.GeneratedMSBuildEditorConfig.editorconfig
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.AssemblyInfoInputs.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.AssemblyInfo.cs
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.csproj.CoreCompileInputs.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.MvcApplicationPartsAssemblyInfo.cs
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.MvcApplicationPartsAssemblyInfo.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\staticwebassets\PosWebAPIs.StaticWebAssets.Manifest.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\staticwebassets\PosWebAPIs.StaticWebAssets.xml
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\scopedcss\bundle\PosWebAPIs.styles.css
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.RazorTargetAssemblyInfo.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.csproj.CopyComplete
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\ref\PosWebAPIs.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.pdb
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.genruntimeconfig.cache
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Humanizer.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.Runtime.Caching.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\New Pos Dotnet with Angular\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\appsettings.Development.json
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\appsettings.json
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.exe
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.deps.json
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.runtimeconfig.json
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.runtimeconfig.dev.json
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\ref\PosWebAPIs.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\PosWebAPIs.pdb
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Humanizer.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Microsoft.OpenApi.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Newtonsoft.Json.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.Runtime.Caching.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.csproj.AssemblyReference.cache
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.GeneratedMSBuildEditorConfig.editorconfig
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.AssemblyInfoInputs.cache
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.AssemblyInfo.cs
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.csproj.CoreCompileInputs.cache
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.MvcApplicationPartsAssemblyInfo.cs
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.MvcApplicationPartsAssemblyInfo.cache
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\staticwebassets\PosWebAPIs.StaticWebAssets.Manifest.cache
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\staticwebassets\PosWebAPIs.StaticWebAssets.xml
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\scopedcss\bundle\PosWebAPIs.styles.css
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.RazorTargetAssemblyInfo.cache
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.csproj.CopyComplete
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\ref\PosWebAPIs.dll
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.pdb
+F:\New folder\POS_angular_DotNetApi_MSSQL-main\PosWebAPIs\PosWebAPIs\obj\Debug\net5.0\PosWebAPIs.genruntimeconfig.cache

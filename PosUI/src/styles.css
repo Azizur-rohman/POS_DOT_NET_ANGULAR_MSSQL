@@ -1,0 +1,82 @@
+/*For Material Icons Start*/
+@font-face {
+  font-family: Roboto;
+  src: url("./assets/fonts/Roboto-Regular.otf");
+}
+
+* {
+  font-family: Roboto;
+}
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/icons/material_icons.woff2") format("woff2");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  /* -webkit-font-feature-settings: 'liga'; Test*/
+  -webkit-font-smoothing: antialiased;
+}
+/*For Material Icons End*/
+.delete-record-btn{
+  color: red;
+}
+
+mat-icon{
+  cursor: pointer;
+}
+
+/*Mat table CSS*/
+
+
+
+/*Mat table CSS*/
+
+.snackbar-container {
+  --background-color: #ffffff;
+  --color: #212121;
+  word-break: break-word;
+  z-index: 999999;
+  font-size: 1.5rem;
+}
+
+.snackbar-container.success {
+  --background-color: #d4edda;
+  --color: green;
+}
+
+.snackbar-container.danger {
+  --background-color: #f7d7da;
+  border: 1px solid #fd9090;
+  --color: rgb(255, 2, 2);
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-supporting-text-font: Roboto, sans-serif;
+  --mdc-snackbar-supporting-text-line-height: 20px;
+  /* --mdc-snackbar-supporting-text-size: 14px; */
+  --mdc-snackbar-supporting-text-weight: 400;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: var(--background-color);
+  --mdc-snackbar-supporting-text-color: var(--color);
+  --mat-snack-bar-button-color: #ff4081;
+}
+
+.sidebar.sidebar-fixed {
+  z-index: 1000;
+}

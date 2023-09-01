@@ -1,0 +1,38 @@
+.mat-row:nth-child(even) {
+    background-color: #bbf3e5; /* Alternate row background color */
+  }
+
+/* custom-table.scss */
+
+/* Target the material table element */
+.mat-data-table {
+    /* Add custom styles to the table */
+    border: 1px solid #b4b4b4;
+  }
+  
+thead,  th {
+    border: 1px solid #ffffff;
+     color: white;
+}
+
+.mat-mdc-card {
+    padding: 10px;
+}
+
+.mat-mdc-header-row {
+    padding: 10px;
+    background-color: #0101a8;
+    color: white;
+    border: #b4b4b4;
+}
+  
+  /* Target the table data rows */
+  td {
+    border: 1px solid #b4b4b4;
+  
+  }
+  
+  /* Target the table data cells */
+  .red-text {
+    color: red;
+  }

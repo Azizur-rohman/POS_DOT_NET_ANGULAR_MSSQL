@@ -1,0 +1,31 @@
+.main-section {
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: auto;
+    margin: 5%;
+}
+
+.top-div {
+    background-color: #0a72e0;
+    height: 80px; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.top-div .heading {
+    font-size: 2rem;  
+    color: #ffffff; 
+    text-align: center; 
+    padding-top: 20px;
+}
+
+.sub-section {
+    margin: 20px;
+    width: 500px;
+    height: 400px;
+}
+
+.close-btn {
+    float: right;
+    margin: 0 20px 20px 0;
+}

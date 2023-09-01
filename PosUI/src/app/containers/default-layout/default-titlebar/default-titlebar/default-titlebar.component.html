@@ -1,0 +1,20 @@
+<ng-container>
+    <c-container [fluid]="true" style="background-color: aqua;">
+        <div style="float: left; transform: translateY(10px); position: relative">
+        <mat-icon>account_balance</mat-icon>
+        <h3 style="text-align: center; padding-left: 5px; float: right; z-index: 99999999999; position: relative">{{uiInfo?.title}}</h3>
+        </div>
+        <div style="float: right;" fxLayoutGap="20px">
+        <mat-icon>edit</mat-icon>
+        <mat-icon>refresh</mat-icon>
+                <button type="submit" [attr.form]="uiInfo?.formId" *ngIf="uiInfo?.formId"
+                    mat-icon-button color="accent" matTooltip="Save Changes" matTooltipClass="tooltip">
+                    <mat-icon>save</mat-icon>
+                </button>
+                <button [disabled]="isLoading" type="button" *ngIf="uiInfo?.submitAll" mat-icon-button color="accent"
+                    matTooltip="Submit" matTooltipClass="tooltip" (click)="uiInfo?.submitAll()">
+                    <mat-icon>save</mat-icon>
+                </button>
+        </div>
+    </c-container>
+</ng-container>

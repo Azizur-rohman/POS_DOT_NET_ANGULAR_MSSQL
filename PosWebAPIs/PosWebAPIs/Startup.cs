@@ -45,6 +45,8 @@ namespace PosWebAPIs
             services.AddScoped<IStockManagementService, StockManagementService>();
             services.AddScoped<IUserCategoryService, UserCategoryService>();
             services.AddScoped<ISaleService, SaleService>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
+            services.AddScoped<IMenuPathService, MenuPathService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -69,12 +71,12 @@ namespace PosWebAPIs
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment() || env.IsProduction())
-            {
+            //if (env.IsDevelopment() || env.IsProduction())
+            //{
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PosWebAPIs v1"));
-            }
+            //}
 
             app.UseHttpsRedirection();
 

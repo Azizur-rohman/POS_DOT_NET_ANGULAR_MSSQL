@@ -129,44 +129,83 @@ namespace PosWebAPIs.Services
             return isDuplicate;
         }
 
+        //public bool Add(List<Product> model, ModelContext _db)
+        //{
+        //    bool isSaved = false;
+        //    string serial;
+        //    int taracNumber = 1;
+        //    var productList = new List<Product>();
+        //    foreach (var i in model)
+        //    {
+        //        var obj = new Product();
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        {
+        //            connection.Open();
+        //            using (SqlCommand command = new SqlCommand("dbo.InsertData", connection))
+        //            {
+        //                var last = _db.Products.OrderByDescending(x => x.Id).FirstOrDefault();
+        //                if (last == null)
+        //                    serial = "001";
+        //                else
+        //                {
+        //                    taracNumber = int.Parse(last.ProductCode) + 1;
+        //                    if (taracNumber.ToString().Length >= 3)
+        //                        serial = taracNumber.ToString();
+        //                    else
+        //                        serial = taracNumber.ToString()
+        //                            .PadLeft(3, '0');
+        //                }
+        //                command.CommandType = CommandType.StoredProcedure;
+        //                command.Parameters.AddWithValue("@Name", i.Name);
+        //                command.Parameters.AddWithValue("@ProductCode", serial);
+        //                command.Parameters.AddWithValue("@Category", i.Category);
+        //                command.Parameters.AddWithValue("@Image", i.Image);
+        //                command.Parameters.AddWithValue("@Price", i.Price);
+        //                command.Parameters.AddWithValue("@CreatedBy", i.CreatedBy);
+        //                command.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+        //                command.ExecuteNonQuery();
+        //            }
+        //        }
+
+        //    };
+        //    isSaved = true;
+        //    return isSaved;
+        //}
+
         public bool Add(List<Product> model, ModelContext _db)
         {
             bool isSaved = false;
             string serial;
             int taracNumber = 1;
-            var productList = new List<Product>();
+            var ProductList = new List<Product>();
+
             foreach (var i in model)
             {
-                var obj = new Product();
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                var last = _db.Products.OrderByDescending(x => x.Id).FirstOrDefault();
+                if (last == null)
+                    serial = "001";
+                else
                 {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand("dbo.InsertData", connection))
-                    {
-                        var last = _db.Products.OrderByDescending(x => x.Id).FirstOrDefault();
-                        if (last == null)
-                            serial = "001";
-                        else
-                        {
-                            taracNumber = int.Parse(last.ProductCode) + 1;
-                            if (taracNumber.ToString().Length >= 3)
-                                serial = taracNumber.ToString();
-                            else
-                                serial = taracNumber.ToString()
-                                    .PadLeft(3, '0');
-                        }
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@Name", i.Name);
-                        command.Parameters.AddWithValue("@ProductCode", serial);
-                        command.Parameters.AddWithValue("@Category", i.Category);
-                        command.Parameters.AddWithValue("@Image", i.Image);
-                        command.Parameters.AddWithValue("@Price", i.Price);
-                        command.Parameters.AddWithValue("@CreatedBy", i.CreatedBy);
-                        command.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
-                        command.ExecuteNonQuery();
-                    }
+                    taracNumber = int.Parse(last.ProductCode) + 1;
+                    if (taracNumber.ToString().Length >= 3)
+                        serial = taracNumber.ToString();
+                    else
+                        serial = taracNumber.ToString()
+                            .PadLeft(3, '0');
+                }
+                var obj = new Product();
+                {
+                    obj.Name = i.Name;
+                    obj.ProductCode = serial;
+                    obj.Category = i.Category;
+                    obj.Image = i.Image;
+                    obj.Price = i.Price;
+                    obj.CreatedBy = i.CreatedBy;
+                    obj.CreatedDate = i.CreatedDate;
                 }
 
+                _db.Products.AddRange(obj);
+                _db.SaveChanges();
             };
             isSaved = true;
             return isSaved;

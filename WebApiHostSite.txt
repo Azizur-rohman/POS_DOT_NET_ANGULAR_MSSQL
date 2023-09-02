@@ -1,0 +1,11 @@
+Site Name: https://member5-7.smarterasp.net/account/account_screen
+Email: azizislam724@gmail.com
+UserName: azizur
+Password: abcd@1234
+Mysite: https://azizur.bsite.net
+Hosting Account ID: azizur-001
+Password: abcd@1234
+First Website Root Folder Name: pos
+Hosting Plan Name: W60-US
+Database Name: POS
+Password: abcd@1234

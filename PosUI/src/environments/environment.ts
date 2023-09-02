@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // baseUrl: 'https://192.168.0.108:5003/',
-  baseUrl: 'http://localhost:5001/',
+  baseUrl: 'https://azizur-001-site1.atempurl.com/',
+  // baseUrl: 'http://localhost:5001/',
   testUrl: 'http://localhost:5001',
 
 

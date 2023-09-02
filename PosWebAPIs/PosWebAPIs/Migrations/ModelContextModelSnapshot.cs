@@ -61,6 +61,12 @@ namespace PosWebAPIs.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Path")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -69,6 +75,12 @@ namespace PosWebAPIs.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nchar(10)")
                         .IsFixedLength(true);
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

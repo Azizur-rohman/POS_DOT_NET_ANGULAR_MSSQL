@@ -127,18 +127,8 @@ namespace PosWebAPIs.Controllers
                 var data = _UserRoleService.GetUserRoleById(_db, Id);
                 if (data != null)
                 {
-                    var getData = new UserRole();
-
-                    getData.Id = data.Id;
-                    getData.UserCategory = data.UserCategory;
-                    getData.PathId = data.PathId;
-                    getData.CreatedBy = data.CreatedBy;
-                    getData.CreatedDate = data.CreatedDate;
-                    getData.UpdatedBy = data.UpdatedBy;
-                    getData.UpdatedDate = data.UpdatedDate;
-
                     returnObj.IsExecuted = true;
-                    returnObj.Data = getData;
+                    returnObj.Data = data;
                     return Ok(returnObj);
                 }
                 else

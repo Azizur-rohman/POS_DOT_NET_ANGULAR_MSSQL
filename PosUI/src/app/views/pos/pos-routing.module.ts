@@ -13,6 +13,10 @@ import { AddUserEntryComponent } from './user-entry/add-user-entry/add-user-entr
 import { ViewUserEntryComponent } from './user-entry/view-user-entry/view-user-entry.component';
 import { ViewSaleComponent } from './sale/view-sale/view-sale.component';
 import { AddSaleComponent } from './sale/add-sale/add-sale.component';
+import { AddUserRoleComponent } from './user-role/add-user-role/add-user-role.component';
+import { ViewUserRoleComponent } from './user-role/view-user-role/view-user-role.component';
+import { AddMenuPathComponent } from './menu-path/add-menu-path/add-menu-path.component';
+import { ViewMenuPathComponent } from './menu-path/view-menu-path/view-menu-path.component';
 
 const routes: Routes = [
   
@@ -95,6 +99,34 @@ const routes: Routes = [
         }
       },
       { path: 'sale/view', component: ViewSaleComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }  
+      },
+      { path: 'menu-path', component: AddMenuPathComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }
+      },
+      { path: 'menu-path/view', component: ViewMenuPathComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }  
+      },
+      { path: 'user-role', component: AddUserRoleComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }
+      },
+      { path: 'user-role/view', component: ViewUserRoleComponent,
         canActivate: [hasRoleGuard],
         data:
         {

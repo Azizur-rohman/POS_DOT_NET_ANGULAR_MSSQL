@@ -59,12 +59,25 @@ namespace PosWebAPIs.Services
 
         public UserRole GetUserRoleById(ModelContext _db, int Id)
         {
-            //var data = new List<Category>();
-            var data = _db.UserRoles.FirstOrDefault(
-                                     x => x.Id == Id
-               );
+            var data = _db.UserRoles.FirstOrDefault(x => x.Id == Id);
+            if (data != null)
+            {
+                var getData = new UserRole();
 
-            return data;
+                getData.Id = data.Id;
+                getData.UserCategory = data.UserCategory;
+                getData.PathId = data.PathId;
+                getData.CreatedBy = data.CreatedBy;
+                getData.CreatedDate = data.CreatedDate;
+                getData.UpdatedBy = data.UpdatedBy;
+                getData.UpdatedDate = data.UpdatedDate;
+
+                return getData;
+            }
+            else
+            {
+                return null;
+            }
         }
 
 
@@ -74,8 +87,10 @@ namespace PosWebAPIs.Services
                        select new
                        {
                            id = (decimal)ct.Id,
-                           user_category = ct.UserCategory,
+                           user_category_code = ct.UserCategory,
+                           user_category = _db.UserCategories.AsNoTracking().FirstOrDefault(x=> x.UserCategoryCode ==ct.UserCategory)?.UserCategoryName,
                            path_id = ct.PathId,
+                           path = _db.MenuPaths.AsNoTracking().FirstOrDefault(x => x.PathId == ct.PathId)?.Path,
                            created_by = ct.CreatedBy,
                            created_date = ct.CreatedDate
 

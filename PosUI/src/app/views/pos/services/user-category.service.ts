@@ -35,7 +35,7 @@ export class UserCategoryService {
     return this.http.post(`api/user-category/update/`, value);
   }
 
-  public getUserRoleList() : Observable<any> {   
-    return this.http.get(`api/user/user-role`);
-  }
+  // public getUserRoleList() : Observable<any> {   
+  //   return this.http.get(`api/user/user-role`);
+  // }
 }

@@ -22,7 +22,8 @@ namespace PosWebAPIs.Services
                            id = user.Id,
                            userId = user.UserId,
                            name = user.Name,
-                           userCategory = _db.UserCategories.AsNoTracking().FirstOrDefault(x=>x.UserCategoryCode == user.UserCategory)?.UserCategoryName,
+                           userCategory = _db.UserCategories.AsNoTracking().FirstOrDefault(x => x.UserCategoryCode == user.UserCategory)?.UserCategoryName,
+                           image = user.Image,
                            address = user.Address,
                            phoneNo = user.PhoneNumber,
                            created_by = user.CreatedBy,
@@ -42,6 +43,8 @@ namespace PosWebAPIs.Services
                        {
                            id = user.Id,
                            name = user.Name,
+                           userId = user.UserId,
+                           image = user.Image,
                            role = _db.UserCategories.FirstOrDefault(x => x.UserCategoryCode == user.UserCategory).UserCategoryName,
                            isLoggedIn = true
                        };
@@ -61,7 +64,7 @@ namespace PosWebAPIs.Services
             var data = from userRole in _db.UserRoles.AsNoTracking().ToList()
                        select new
                        {
-                           user_category = _db.UserCategories.FirstOrDefault(x=>x.UserCategoryCode == userRole.UserCategory).UserCategoryName,
+                           user_category = _db.UserCategories.FirstOrDefault(x=>x.UserCategoryCode == userRole.UserCategory)?.UserCategoryName,
                            path = _db.MenuPaths.FirstOrDefault(x => x.PathId == userRole.PathId).Path,
                        };
 
@@ -107,6 +110,7 @@ namespace PosWebAPIs.Services
                     obj.Name = i.Name;
                     obj.UserId = serial;
                     obj.UserCategory = i.UserCategory;
+                    obj.Image = i.Image;
                     obj.Address = i.Address;
                     obj.PhoneNumber = i.PhoneNumber;
                     obj.Password = i.Password;
@@ -126,7 +130,8 @@ namespace PosWebAPIs.Services
             bool isSaved = false;
 
             var isExistData = _db.Users.AsQueryable().FirstOrDefault(x => x.Name == model.Name 
-                                                                         && x.UserCategory == model.UserCategory 
+                                                                         && x.UserCategory == model.UserCategory
+                                                                         && x.Image == model.Image
                                                                          && x.Address == model.Address 
                                                                          && x.PhoneNumber == model.PhoneNumber);
             if (isExistData == null)
@@ -136,6 +141,7 @@ namespace PosWebAPIs.Services
                 {
                     oldData.Name = model.Name;
                     oldData.UserCategory = model.UserCategory;
+                    oldData.Image = model.Image;
                     oldData.Address = model.Address;
                     oldData.PhoneNumber = model.PhoneNumber;
                     oldData.Password = model.Password;
@@ -164,6 +170,7 @@ namespace PosWebAPIs.Services
                 getData.Id = data.Id;
                 getData.Name = data.Name;
                 getData.UserCategory = data.UserCategory;
+                getData.Image = data.Image;
                 getData.Address = data.Address;
                 getData.PhoneNumber = data.PhoneNumber;
                 getData.Password = data.Password;

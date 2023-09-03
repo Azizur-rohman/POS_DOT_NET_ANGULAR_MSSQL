@@ -17,6 +17,7 @@ import { debounceTime, switchMap, tap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { hasRoleGuard } from 'src/app/views/pages/services/has-role.guard';
 import { UserCategoryService } from 'src/app/views/pos/services/user-category.service';
+import { UserRoleService } from 'src/app/views/pos/services/user-role.service';
 // import * as moment from 'moment';
 
 @Component({
@@ -83,7 +84,8 @@ export class LoginComponent {
     private notificationService : NotificationService,
     private commonService: CommonService,
     private toastr: ToastrService,
-    private userCategoryService: UserCategoryService
+    private userCategoryService: UserCategoryService,
+    public UserRoleService: UserRoleService,
   ) {}
 
   ngOnInit(): void {
@@ -137,7 +139,7 @@ export class LoginComponent {
   //   }
   // };
   getUserRoleList() {
-    this.userCategoryService.getUserRoleList().subscribe(getData => {  
+    this.UserRoleService.getUserRoleList().subscribe(getData => {  
         if (getData['isExecuted'] == true) {          
         this.roleData = getData['data'] ;
         }

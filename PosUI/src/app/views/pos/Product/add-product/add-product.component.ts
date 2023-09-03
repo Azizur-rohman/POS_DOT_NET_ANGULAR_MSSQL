@@ -134,25 +134,13 @@ export class AddProductComponent {
       this.productForm.get('image').setValue(null)
       return;
     }
-    // reader.onloadend = this._handleReaderLoaded.bind(this);
-    // reader.readAsDataURL(file);
     reader.onload = () => {
           this.imageSrc = reader.result as string;
           this.productForm.get('image').setValue(this.imageSrc);
-          console.log('this.imageSrc', this.imageSrc);
           
         };
         reader.readAsDataURL(file);
   };
-
-  // _handleReaderLoaded(e: any) {
-
-  //   let reader = e.target;
-  //   var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-  //   this.imageSrc = base64result;
-  //   this.productForm.get('image').setValue(this.imageSrc);
-
-  // };
 
   getCategoryList() {
     // this.asyncService.start();

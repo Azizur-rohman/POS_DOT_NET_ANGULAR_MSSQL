@@ -127,18 +127,8 @@ namespace PosWebAPIs.Controllers
                 var data = _MenuPathService.GetMenuPathById(_db, Id);
                 if (data != null)
                 {
-                    var getData = new MenuPath();
-
-                    getData.Id = data.Id;
-                    getData.Path = data.Path;
-                    getData.PathId = data.PathId;
-                    getData.CreatedBy = data.CreatedBy;
-                    getData.CreatedDate = data.CreatedDate;
-                    getData.UpdatedBy = data.UpdatedBy;
-                    getData.UpdatedDate = data.UpdatedDate;
-
                     returnObj.IsExecuted = true;
-                    returnObj.Data = getData;
+                    returnObj.Data = data;
                     return Ok(returnObj);
                 }
                 else

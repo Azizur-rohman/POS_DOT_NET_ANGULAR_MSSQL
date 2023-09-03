@@ -42,9 +42,7 @@ namespace PosWebAPIs.Models.DBModels
             {
                 entity.ToTable("Category");
 
-                entity.Property(e => e.CategoryCode)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.CategoryCode).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
@@ -61,20 +59,24 @@ namespace PosWebAPIs.Models.DBModels
             {
                 entity.ToTable("Menu_Path");
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Path).HasMaxLength(50);
 
-                entity.Property(e => e.PathId)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.PathId).HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("Product");
 
-                entity.Property(e => e.Category)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.Category).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
@@ -84,9 +86,7 @@ namespace PosWebAPIs.Models.DBModels
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.ProductCode)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.ProductCode).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
@@ -118,17 +118,13 @@ namespace PosWebAPIs.Models.DBModels
             {
                 entity.ToTable("Sale_Detail");
 
-                entity.Property(e => e.CategoryCode)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.CategoryCode).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ProductCode)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.ProductCode).HasMaxLength(50);
 
                 entity.Property(e => e.SalePrice).HasColumnType("decimal(18, 0)");
 
@@ -143,17 +139,13 @@ namespace PosWebAPIs.Models.DBModels
             {
                 entity.ToTable("Stock_Management");
 
-                entity.Property(e => e.Category)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.Category).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Product)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.Product).HasMaxLength(50);
 
                 entity.Property(e => e.SalePrice)
                     .HasColumnType("decimal(18, 0)")
@@ -186,13 +178,9 @@ namespace PosWebAPIs.Models.DBModels
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UserCategory)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.UserCategory).HasMaxLength(10);
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.UserId).HasMaxLength(10);
             });
 
             modelBuilder.Entity<UserCategory>(entity =>
@@ -207,9 +195,7 @@ namespace PosWebAPIs.Models.DBModels
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UserCategoryCode)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.UserCategoryCode).HasMaxLength(10);
 
                 entity.Property(e => e.UserCategoryName).HasMaxLength(50);
             });
@@ -222,17 +208,13 @@ namespace PosWebAPIs.Models.DBModels
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PathId)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.PathId).HasMaxLength(10);
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UserCategory)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.UserCategory).HasMaxLength(10);
             });
 
             OnModelCreatingPartial(modelBuilder);

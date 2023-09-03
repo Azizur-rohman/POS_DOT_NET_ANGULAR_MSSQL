@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
-    <History>True|2023-09-02T18:49:01.7430948Z;True|2023-09-03T00:16:24.8520379+06:00;True|2023-09-02T23:30:04.1168105+06:00;</History>
+    <History>True|2023-09-03T20:20:08.6886752Z;True|2023-09-03T00:49:01.7430948+06:00;True|2023-09-03T00:16:24.8520379+06:00;True|2023-09-02T23:30:04.1168105+06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="POS">

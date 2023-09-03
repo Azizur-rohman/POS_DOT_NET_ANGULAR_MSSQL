@@ -27,9 +27,8 @@ namespace PosWebAPIs.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("CategoryCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -62,25 +61,26 @@ namespace PosWebAPIs.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Path")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PathId")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -95,9 +95,8 @@ namespace PosWebAPIs.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Category")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -117,9 +116,8 @@ namespace PosWebAPIs.Migrations
                         .HasColumnType("decimal(18,0)");
 
                     b.Property<string>("ProductCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
@@ -193,9 +191,8 @@ namespace PosWebAPIs.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("CategoryCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -208,9 +205,8 @@ namespace PosWebAPIs.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -241,9 +237,8 @@ namespace PosWebAPIs.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Category")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
@@ -253,9 +248,8 @@ namespace PosWebAPIs.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Product")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -294,6 +288,9 @@ namespace PosWebAPIs.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -316,13 +313,11 @@ namespace PosWebAPIs.Migrations
 
                     b.Property<string>("UserCategory")
                         .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("UserId")
                         .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -352,8 +347,7 @@ namespace PosWebAPIs.Migrations
 
                     b.Property<string>("UserCategoryCode")
                         .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("UserCategoryName")
                         .HasMaxLength(50)
@@ -380,8 +374,7 @@ namespace PosWebAPIs.Migrations
 
                     b.Property<string>("PathId")
                         .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
@@ -392,8 +385,7 @@ namespace PosWebAPIs.Migrations
 
                     b.Property<string>("UserCategory")
                         .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 

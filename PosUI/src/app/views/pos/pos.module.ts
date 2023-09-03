@@ -23,6 +23,10 @@ import { ViewUserEntryComponent } from './user-entry/view-user-entry/view-user-e
 import { AddSaleComponent } from './sale/add-sale/add-sale.component';
 import { ViewSaleComponent } from './sale/view-sale/view-sale.component';
 import { ModalSaleComponent } from './sale/modal-sale/modal-sale.component';
+import { AddMenuPathComponent } from './menu-path/add-menu-path/add-menu-path.component';
+import { ViewMenuPathComponent } from './menu-path/view-menu-path/view-menu-path.component';
+import { AddUserRoleComponent } from './user-role/add-user-role/add-user-role.component';
+import { ViewUserRoleComponent } from './user-role/view-user-role/view-user-role.component';
 
 
 
@@ -43,6 +47,10 @@ import { ModalSaleComponent } from './sale/modal-sale/modal-sale.component';
     AddSaleComponent,
     ViewSaleComponent,
     ModalSaleComponent,
+    AddMenuPathComponent,
+    ViewMenuPathComponent,
+    AddUserRoleComponent,
+    ViewUserRoleComponent,
   ],
   imports: [
     CommonModule,

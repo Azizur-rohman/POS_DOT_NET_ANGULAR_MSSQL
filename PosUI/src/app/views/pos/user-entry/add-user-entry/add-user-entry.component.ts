@@ -40,6 +40,11 @@ export class AddUserEntryComponent {
   // empListSub: Subscription;
   itemArray: any = [];
   userCategoryList: any = [];
+  imageUrl: any;
+  imageSrc: string | undefined;
+  selectedFile: File | undefined;
+  emptyImage: string= 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAACrUlEQVR4nO2YT2sTURTF8+FkSlfdWj+Ai1jQlcQkHQzpTJo0mdAWom1RN1ootoIRg2ijlVptS3OFgn8QQdBSilUr6qxcXLnTVtG0fcVJeMm8c+FskvMewy/nvncnsRgKhYpCTaStjSm7ZxvqUTIQVk0AK8kTvLWYhhbVDITVgQB9ciBSMwBAChcUACQAZJ3HDRJIAMhIIEWwhV9Uz0FVNYMDAU7aVvVqpvfBlYu9P++Mn+RapR+q/GEgTISNMBJWh77STQ5aX7eXbO1t4neYhImwUb4TA6ADgD4S6GhvWbQwASDrTl3HXiLf14b43qVTPJG2gpkqjGQPGTO+rWXNAbh+ayA0uH/1fPaMOQAbN+MtByh7GgNwZznD08N9LYM3ne/jnZWMOQB9OQcbQ7y5kOT39UQoyR6yV7uft+MA+l0mACQAZCSQ9LciWpgAkHWnCZcIASDrThTGGAJA7iZhkCYAZCSQ9LciWpgAkHWnCZcIASDrThTGGAJA7iZhkCYAZCSQ9LciWpgAkHWnCZcIHQ1h44nbcq8xt/CnZZcTWY8fzuWVXvGcz3r88ZkaohEAfzQc9kZLfPpCmeOpMr+pHw7m7aMcx1Ne4B0pF4O1xgOszRQCIPtKOR5/XmkG82XV5bS7C29ftZm82QncXHLZLZY46ewm8KztcbZQ4ts3Ck1e+Uy+E494ZY2slT2MBejvafXucABldKyo9IpHvLJG5QVAAkBGAgktrP2M83EGOgCoO2U+bmEHADtVW0/dYK57NZ9TesUjXlmDOZDa+8NEfpBev5/ja1MjoXTUG0nkAc7P5v/6c+B/NHe9YC7Ad4/dAGIYva7nzAXot1kASADISCDpb0W0MAEgR/4S+VBPBAsg+zcDYXIsgJcHrZdihKwmBsJGCRCFQqFQqNgx6xenztHu7V06BwAAAABJRU5ErkJggg=='
+
 
   constructor(
     public fb: FormBuilder,
@@ -83,8 +88,10 @@ export class AddUserEntryComponent {
       id: [0],
       name: ['', Validators.required],
       userCategory: ['', Validators.required],
-      address: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      image: [''],
+      file: [''],
+      address: [''],
+      phoneNumber: [''],
       password: ['', Validators.required],
       createdBy: [this.loginUser],
       createdDate: [this.currentDate],
@@ -96,6 +103,37 @@ export class AddUserEntryComponent {
   get f() {
     return this.userEntryForm.controls;
   }
+
+  onFileSelected(event: any) {
+    let files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file: File = files[i];
+        this.handleInputChangePhoto(file);
+      }
+    }
+  };
+
+  handleInputChangePhoto(files: any) {
+    var file = files;
+    // var pattern = /pdf/;
+    var patternpng = /png/;
+    var patternjpg = /jpg/;
+    var patternjpeg = /jpeg/;
+    var reader = new FileReader();
+    if (!file.type.match(patternpng) && !file.type.match(patternjpg) && !file.type.match(patternjpeg)) {
+      this.commonService.showErrorMsg('invalid format(Please upload only Image File)');
+      this.userEntryForm.get('file').setValue(null)
+      this.userEntryForm.get('image').setValue(null)
+      return;
+    }
+    reader.onload = () => {
+          this.imageSrc = reader.result as string;
+          this.userEntryForm.get('image').setValue(this.imageSrc);
+          
+        };
+        reader.readAsDataURL(file);
+  };
 
   getUserCategoryList() {
     // this.asyncService.start();
@@ -118,7 +156,8 @@ export class AddUserEntryComponent {
      this.userEntryService.getSingleUser(this.paramId).subscribe(singleData=> {
        if (singleData['isExecuted'] == true) {
          this.userEntryForm.patchValue({ ...singleData.data, updatedBy: this.loginUser, updatedDate : this.currentDate});
-       }
+         this.imageSrc = singleData.data.image;
+        }
        else {
          this.commonService.showErrorMsg(singleData['message']);
        }
@@ -163,9 +202,9 @@ export class AddUserEntryComponent {
             {
               for(let j = 0; j < this.itemArray.length; j++)
               {
-                if(this.itemArray[j].category == this.userCategoryList[i].category_code)
+                if(this.itemArray[j].categoryCode == this.userCategoryList[i].user_category_code)
                 {
-                  this.userCategoryName = this.userCategoryList[i].name
+                  this.userCategoryName = this.userCategoryList[i].user_category_name
                 }
               }
             }

@@ -1,0 +1,74 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Category</strong> <small>Add</small>
+        </c-card-header>
+        <c-card-body>
+          <form
+          [id]="formId"
+          [formGroup]="userRoleForm"
+          (ngSubmit)="onSaveConfirmation()"
+          autocomplete="off"
+        >
+          <c-row>
+            <c-col xs="4">
+                User Category <span style="color: red;">*</span>
+                <select formControlName="userCategory" cSelect required
+                  [ngClass]="{'red-border': f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)}">
+                  <option *ngFor="let option of userCategoryList" [value]="option.user_category_code">{{
+                    option.user_category_name }}</option>
+                </select>
+                <br>
+                <div *ngIf="f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)">
+                  <div *ngIf="f.userCategory.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User
+                    Category Select is required!!!</div>
+                </div>
+              </c-col>
+              <c-col xs="4">
+                Menu Path <span style="color: red;">*</span>
+                <select formControlName="pathId" cSelect required
+                  [ngClass]="{'red-border': f.pathId.invalid && (f.pathId.dirty || f.pathId.touched)}">
+                  <option *ngFor="let option of menuPathList" [value]="option.path_id">{{
+                    option.path }}</option>
+                </select>
+                <br>
+                <div *ngIf="f.pathId.invalid && (f.pathId.dirty || f.pathId.touched)">
+                  <div *ngIf="f.pathId.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">
+                    Menu Path Select is required!!!</div>
+                </div>
+              </c-col>
+          </c-row>
+          <c-row >
+            <c-col xs="3">
+              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add More</button>
+            </c-col>
+          </c-row>
+        </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <mat-card class="mat-card-gap"  *ngIf="!paramId">
+    <table class="report-table">
+      <tr>
+        <th style="text-align: center;">Srl #</th>
+        <th style="text-align: center;">User Category</th>
+        <th style="text-align: center;">Menu Path</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+      <tr *ngFor="let item of itemArray; let i = index">
+        <td style="text-align: center;">{{ i + 1 }}</td>
+        <td>{{ userCategoryName }}</td>
+        <td>{{ menuPath }}</td>
+        <td style="text-align: center">
+          <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
+            >cancel</mat-icon
+          >
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  
+  

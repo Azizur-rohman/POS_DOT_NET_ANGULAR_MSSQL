@@ -58,12 +58,26 @@ namespace PosWebAPIs.Services
 
         public MenuPath GetMenuPathById(ModelContext _db, int Id)
         {
-            //var data = new List<Category>();
-            var data = _db.MenuPaths.FirstOrDefault(
-                                     x => x.Id == Id
-               );
 
-            return data;
+            var data = _db.MenuPaths.FirstOrDefault(x => x.Id == Id);
+            if (data != null)
+            {
+                var getData = new MenuPath();
+
+                getData.Id = data.Id;
+                getData.Path = data.Path;
+                getData.PathId = data.PathId;
+                getData.CreatedBy = data.CreatedBy;
+                getData.CreatedDate = data.CreatedDate;
+                getData.UpdatedBy = data.UpdatedBy;
+                getData.UpdatedDate = data.UpdatedDate;
+
+                return getData;
+            }
+            else
+            {
+                return null;
+            }
         }
 
 

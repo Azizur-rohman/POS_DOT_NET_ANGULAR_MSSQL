@@ -1,101 +1,108 @@
 <c-row ngPreserveWhitespaces>
-    <c-col xs="12">
-      <c-card class="mb-4">
-        <c-card-header>
-          <strong>User</strong> <small>Add</small>
-        </c-card-header>
-        <c-card-body>
-          <form
-          [id]="formId"
-          [formGroup]="userEntryForm"
-          (ngSubmit)="onSaveConfirmation()"
-          autocomplete="off"
-        >
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>User</strong> <small>Add</small>
+      </c-card-header>
+      <c-card-body>
+        <form [id]="formId" [formGroup]="userEntryForm" (ngSubmit)="onSaveConfirmation()" autocomplete="off">
           <c-row>
             <c-col xs="4">
-                Name <span style="color: red;">*</span>
-              <input cFormControl type="text" formControlName="name" placeholder="User name..." required 
-              [ngClass]="{'red-border': f.name.invalid && (f.name.dirty || f.name.touched)}"/>
+              Name <span style="color: red;">*</span>
+              <input cFormControl type="text" formControlName="name" placeholder="User name..." required
+                [ngClass]="{'red-border': f.name.invalid && (f.name.dirty || f.name.touched)}" />
               <br>
               <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">
-                <div *ngIf="f.name.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User Name is required!!!</div>
+                <div *ngIf="f.name.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User Name is
+                  required!!!</div>
               </div>
-          </c-col>
-          <c-col xs="4">
+            </c-col>
+            <c-col xs="4">
               User Category <span style="color: red;">*</span>
-            <select formControlName="userCategory" cSelect required 
-            [ngClass]="{'red-border': f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)}">
-                <option *ngFor="let option of userCategoryList" [value]="option.user_category_code">{{ option.user_category_name }}</option>
-            </select>
-            <br>
-            <div *ngIf="f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)">
-              <div *ngIf="f.userCategory.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User Category Select is required!!!</div>
-            </div>
-        </c-col>
-        <c-col xs="4">
+              <select formControlName="userCategory" cSelect required
+                [ngClass]="{'red-border': f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)}">
+                <option *ngFor="let option of userCategoryList" [value]="option.user_category_code">{{
+                  option.user_category_name }}</option>
+              </select>
+              <br>
+              <div *ngIf="f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)">
+                <div *ngIf="f.userCategory.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User
+                  Category Select is required!!!</div>
+              </div>
+            </c-col>
+            <c-col xs="4">
+              Image
+              <input cFormControl formControlName="file" type="file" (change)="onFileSelected($event)" />
+              <img [src]="imageSrc" *ngIf="imageSrc"
+                style="height: 50px; width: 50px; margin-left: 30%; margin-top: 5px;" />
+              <br>
+            </c-col>
+            <c-col xs="4">
               Address <span style="color: red;">*</span>
-            <input cFormControl type="text" formControlName="address" placeholder="User address..." required 
-            [ngClass]="{'red-border': f.address.invalid && (f.address.dirty || f.address.touched)}"/>
-            <br>
-            <div *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)">
-              <div *ngIf="f.address.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User Address is required!!!</div>
-            </div>
-        </c-col>
-        <c-col xs="4">
+              <input cFormControl type="text" formControlName="address" placeholder="User address..." required
+                [ngClass]="{'red-border': f.address.invalid && (f.address.dirty || f.address.touched)}" />
+              <br>
+              <div *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)">
+                <div *ngIf="f.address.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User
+                  Address is required!!!</div>
+              </div>
+            </c-col>
+            <c-col xs="4">
               Phone No. <span style="color: red;">*</span>
-            <input cFormControl type="text" formControlName="phoneNumber" placeholder="User phone number..." required 
-            [ngClass]="{'red-border': f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)}"/>
-            <br>
-            <div *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
-              <div *ngIf="f.phoneNumber.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User Phone Number is required!!!</div>
-            </div>
-        </c-col>
-        <c-col xs="4">
+              <input cFormControl type="text" formControlName="phoneNumber" placeholder="User phone number..." required
+                [ngClass]="{'red-border': f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)}" />
+              <br>
+              <div *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
+                <div *ngIf="f.phoneNumber.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User
+                  Phone Number is required!!!</div>
+              </div>
+            </c-col>
+            <c-col xs="4">
               Password <span style="color: red;">*</span>
-            <input cFormControl type="text" formControlName="password" placeholder="User password..." required 
-            [ngClass]="{'red-border': f.password.invalid && (f.password.dirty || f.password.touched)}"/>
-            <br>
-            <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
-              <div *ngIf="f.password.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User password is required!!!</div>
-            </div>
-        </c-col>
+              <input cFormControl type="text" formControlName="password" placeholder="User password..." required
+                [ngClass]="{'red-border': f.password.invalid && (f.password.dirty || f.password.touched)}" />
+              <br>
+              <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                <div *ngIf="f.password.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">User
+                  password is required!!!</div>
+              </div>
+            </c-col>
           </c-row>
-          <c-row >
+          <c-row>
             <c-col xs="3">
-              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add More</button>
+              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add
+                More</button>
             </c-col>
           </c-row>
         </form>
-        </c-card-body>
-      </c-card>
-    </c-col>
-  </c-row>
-  
-  <mat-card class="mat-card-gap"  *ngIf="!paramId">
-    <table class="report-table">
-      <tr>
-        <th style="text-align: center;">Srl #</th>
-        <th style="text-align: left;">Name</th>
-        <th style="text-align: center;">User Category</th>
-        <th style="text-align: left;">Address</th>
-        <th style="text-align: left;">Phone No.</th>
-        <th style="text-align: left;">Password</th>
-        <th style="text-align: center;">Action</th>
-      </tr>
-      <tr *ngFor="let item of itemArray; let i = index">
-        <td style="text-align: center;">{{ i + 1 }}</td>
-        <td>{{ item.name }}</td>
-        <td style="text-align: center;">{{ userCategoryName }}</td>
-        <td>{{ item.address }}</td>
-        <td>{{ item.phoneNumber }}</td>
-        <td>{{ item.password }}</td>
-        <td style="text-align: center">
-          <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
-            >cancel</mat-icon
-          >
-        </td>
-      </tr>
-    </table>
-  </mat-card>
-  
-  
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<mat-card class="mat-card-gap" *ngIf="!paramId">
+  <table class="report-table">
+    <tr>
+      <th style="text-align: center;">Srl #</th>
+      <th style="text-align: left;">Name</th>
+      <th style="text-align: center;">User Category</th>
+      <th style="text-align: center;">Image</th>
+      <th style="text-align: left;">Address</th>
+      <th style="text-align: left;">Phone No.</th>
+      <th style="text-align: left;">Password</th>
+      <th style="text-align: center;">Action</th>
+    </tr>
+    <tr *ngFor="let item of itemArray; let i = index">
+      <td style="text-align: center;">{{ i + 1 }}</td>
+      <td>{{ item.name }}</td>
+      <td style="text-align: center;">{{ userCategoryName }}</td>
+      <td style="text-align: center;"><img [src]="item.image ? item.image : emptyImage" style="height: 50px; width: 50px;" /></td>
+      <td>{{ item.address }}</td>
+      <td>{{ item.phoneNumber }}</td>
+      <td>{{ item.password }}</td>
+      <td style="text-align: center">
+        <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn">cancel</mat-icon>
+      </td>
+    </tr>
+  </table>
+</mat-card>

@@ -20,6 +20,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
   uiInfoSub!     : Subscription;
   asyncSub!      : Subscription;
   isLoading      : boolean = false;
+  imageSrc       : string = '';
   successMessage$ = this.notificationService.successMessageAction$.pipe(tap((message)=>{
     if(message){
     setTimeout((message: any)=>{
@@ -53,7 +54,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void { 
-
+    this.authInfo();
     this.uiInfoSub = this.commonService.uiInfo.subscribe((uiInfo: any) => {
       this.uiInfo = uiInfo;
       this.changeDetectorRef.detectChanges();
@@ -64,6 +65,12 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
     //   this.isLoading = loading;
     //   this.changeDetectorRef.detectChanges();
     // });
+  }
+
+  authInfo() {
+    let isLoggedIn: any = localStorage.getItem('isLoggedin');
+    let localData: any = JSON.parse(isLoggedIn);
+    this.imageSrc = localData.image;
   }
 
   logout(){

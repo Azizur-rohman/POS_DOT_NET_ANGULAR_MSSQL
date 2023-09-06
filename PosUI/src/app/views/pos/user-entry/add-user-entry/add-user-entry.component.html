@@ -19,7 +19,7 @@
             </c-col>
             <c-col xs="4">
               User Category <span style="color: red;">*</span>
-              <select formControlName="userCategory" cSelect required
+              <select formControlName="userCategory" cSelect (change)="onSelectUserCategory($event)" required
                 [ngClass]="{'red-border': f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)}">
                 <option *ngFor="let option of userCategoryList" [value]="option.user_category_code">{{
                   option.user_category_name }}</option>
@@ -95,8 +95,8 @@
     <tr *ngFor="let item of itemArray; let i = index">
       <td style="text-align: center;">{{ i + 1 }}</td>
       <td>{{ item.name }}</td>
-      <td style="text-align: center;">{{ userCategoryName }}</td>
-      <td style="text-align: center;"><img [src]="item.image ? item.image : emptyImage" style="height: 50px; width: 50px;" /></td>
+      <td style="text-align: center;">{{ item.userCategoryName }}</td>
+      <td style="text-align: center;"><img [src]="item.image ? item.image : emptyUser" style="height: 50px; width: 50px;" /></td>
       <td>{{ item.address }}</td>
       <td>{{ item.phoneNumber }}</td>
       <td>{{ item.password }}</td>

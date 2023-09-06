@@ -14,7 +14,7 @@
           <c-row>
             <c-col xs="4">
                 User Category <span style="color: red;">*</span>
-                <select formControlName="userCategory" cSelect required
+                <select formControlName="userCategory" cSelect (change)="onSelectUserCategory($event)" required
                   [ngClass]="{'red-border': f.userCategory.invalid && (f.userCategory.dirty || f.userCategory.touched)}">
                   <option *ngFor="let option of userCategoryList" [value]="option.user_category_code">{{
                     option.user_category_name }}</option>
@@ -27,7 +27,7 @@
               </c-col>
               <c-col xs="4">
                 Menu Path <span style="color: red;">*</span>
-                <select formControlName="pathId" cSelect required
+                <select formControlName="pathId" cSelect (change)="onSelectPath($event)" required
                   [ngClass]="{'red-border': f.pathId.invalid && (f.pathId.dirty || f.pathId.touched)}">
                   <option *ngFor="let option of menuPathList" [value]="option.path_id">{{
                     option.path }}</option>
@@ -60,8 +60,8 @@
       </tr>
       <tr *ngFor="let item of itemArray; let i = index">
         <td style="text-align: center;">{{ i + 1 }}</td>
-        <td>{{ userCategoryName }}</td>
-        <td>{{ menuPath }}</td>
+        <td>{{ item.userCategoryName }}</td>
+        <td>{{ item.path }}</td>
         <td style="text-align: center">
           <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
             >cancel</mat-icon

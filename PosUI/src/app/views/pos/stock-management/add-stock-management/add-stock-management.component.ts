@@ -151,7 +151,6 @@ export class AddStockManagementComponent {
   };
 
   onSelectCategory(event: any) {
-    console.log('productCode', this.stockManagementForm.value.product)
     this.productList = this.fetchList.filter((x: any)=> x.category_code == event.target.value)
     const newItem = {name : '--Select Product--'};
     this.productList.unshift(newItem);

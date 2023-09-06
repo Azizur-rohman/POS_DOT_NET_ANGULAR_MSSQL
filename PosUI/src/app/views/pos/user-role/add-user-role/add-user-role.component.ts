@@ -89,7 +89,9 @@ export class AddUserRoleComponent {
     this.userRoleForm = this.fb.group({
       id: [0],
       userCategory: ['', Validators.required],
+      userCategoryName: [''],
       pathId: ['', Validators.required],
+      path: [''],
       createdBy: [this.loginUser],
       createdDate: [this.currentDate],
       updatedBy: [this.loginUser],
@@ -134,6 +136,16 @@ export class AddUserRoleComponent {
       this.commonService.showErrorMsg(err.message);
     })
   };
+
+  onSelectUserCategory(event: any) {
+    let userCategory = this.userCategoryList.find((x: any)=> x.user_category_code == event.target.value).user_category_name
+    this.userRoleForm.get('userCategoryName')?.setValue(userCategory);
+  }
+
+  onSelectPath(event: any) {
+    let menuPath = this.menuPathList.find((x: any)=> x.path_id == event.target.value)
+    this.userRoleForm.get('path')?.setValue(menuPath);
+  }
 
   isParam() {
      this.UserRoleService.getSingleUserRole(this.paramId).subscribe(singleData=> {
@@ -186,7 +198,7 @@ export class AddUserRoleComponent {
               {
                 if(this.itemArray[j].userCategory == this.userCategoryList[i].user_category_code)
                 {
-                  this.userCategoryName = this.userCategoryList[i].user_category_name
+                  this.itemArray[j].userCategoryName = this.userCategoryList[i].user_category_name
                 }
               }
             }
@@ -196,7 +208,7 @@ export class AddUserRoleComponent {
               {
                 if(this.itemArray[j].pathId == this.menuPathList[i].path_id)
                 {
-                  this.menuPath = this.menuPathList[i].path
+                  this.itemArray[j].path = this.menuPathList[i].path
                 }
               }
             }

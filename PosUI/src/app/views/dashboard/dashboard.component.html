@@ -388,23 +388,28 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users; index as i">
+            <tr *ngFor="let user of userData; index as i">
               <td class="text-center">
                 <c-avatar
                   size="md"
-                  src="{{ user.avatar }}"
-                  status="{{ user.status }}"
+                  src="{{ user.image != null ? user.image : imageSrc }}"
+                  status="success"
                 ></c-avatar>
+                <!-- <c-avatar
+                status="success"
+              >
+              <img style="height: 40px; width: 40px; border-radius: 40px;"  [src]="imageSrc">
+              </c-avatar> -->
               </td>
               <td>
                 <div>{{ user.name }}</div>
-                <div class="small text-medium-emphasis text-nowrap">
+                <!-- <div class="small text-medium-emphasis text-nowrap">
                   <span>
                     {{ user.state }} | Registered: {{ user.registered }}
                   </span>
-                </div>
+                </div> -->
               </td>
-              <td class="text-center">
+              <!-- <td class="text-center">
                 <svg
                   cIcon
                   id="{{ user.country + user.name }}"
@@ -437,7 +442,7 @@
               <td>
                 <div class="small text-medium-emphasis">Last login</div>
                 <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

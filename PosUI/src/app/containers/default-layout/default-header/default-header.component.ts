@@ -9,6 +9,8 @@ import { AsyncService } from 'src/app/shared/services/async.service';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { LoaderService } from 'src/app/shared/loader/loader.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UserEntryService } from 'src/app/views/pos/services/user-entry.service';
+const user = require('src/assets/images/empty-user.js');
 
 @Component({
   selector: 'app-default-header',
@@ -21,6 +23,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
   asyncSub!      : Subscription;
   isLoading      : boolean = false;
   imageSrc       : string = '';
+  loginUser: string= '';
   successMessage$ = this.notificationService.successMessageAction$.pipe(tap((message)=>{
     if(message){
     setTimeout((message: any)=>{
@@ -48,13 +51,15 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
               private changeDetectorRef: ChangeDetectorRef,
               // private asyncService: AsyncService,
               private notificationService: NotificationService,
-              public loaderService: LoaderService
+              public loaderService: LoaderService,
+              public userEntryService: UserEntryService,
               ) {
     super();
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.authInfo();
+    this.getUserRoleList();
     this.uiInfoSub = this.commonService.uiInfo.subscribe((uiInfo: any) => {
       this.uiInfo = uiInfo;
       this.changeDetectorRef.detectChanges();
@@ -70,8 +75,23 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
   authInfo() {
     let isLoggedIn: any = localStorage.getItem('isLoggedin');
     let localData: any = JSON.parse(isLoggedIn);
-    this.imageSrc = localData.image;
+    this.loginUser = localData.userId;
   }
+
+  getUserRoleList() {
+    this.userEntryService.getUserList().subscribe(getData => {  
+        if (getData['isExecuted'] == true) {          
+        let userData = getData['data'] ;
+        for(let i=0; i<userData.length ; i++)
+        {
+          if(userData[i].userId == this.loginUser)
+          {
+            this.imageSrc = userData[i].image != null ? userData[i].image : user.imgBase64;
+          }
+        }
+        }
+      });
+  };
 
   logout(){
     localStorage.setItem("isLoggedin", "false");

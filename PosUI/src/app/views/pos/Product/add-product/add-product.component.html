@@ -73,7 +73,7 @@
         <td style="text-align: center;">{{ i + 1 }}</td>
         <td>{{ item.name}}</td>
         <td style="text-align: center;">{{ categoryName}}</td>
-        <td style="text-align: center;"><img [src]="item.image ? item.image : emptyImage" style="height: 50px; width: 50px;" /></td>
+        <td style="text-align: center;"><img [src]="item.image ? item.image : emptyProduct" style="height: 50px; width: 50px;" /></td>
         <td style="text-align: right">{{ item.price | number }}</td>
         <td style="text-align: center">
           <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"

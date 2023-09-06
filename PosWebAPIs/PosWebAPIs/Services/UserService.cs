@@ -44,7 +44,6 @@ namespace PosWebAPIs.Services
                            id = user.Id,
                            name = user.Name,
                            userId = user.UserId,
-                           image = user.Image,
                            role = _db.UserCategories.FirstOrDefault(x => x.UserCategoryCode == user.UserCategory).UserCategoryName,
                            isLoggedIn = true
                        };

@@ -5,6 +5,7 @@ import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { UserRoleService } from 'src/app/views/pos/services/user-role.service';
 import { UserEntryService } from 'src/app/views/pos/services/user-entry.service';
+import * as moment from 'moment';
 const user = require('src/assets/images/empty-user.js');
 
 interface IUser {
@@ -29,6 +30,11 @@ export class DashboardComponent implements OnInit {
   
   userData: any = [];
   imageSrc: string = ''
+  currentDate: any = moment().format('YYYY-MM-DDThh:mm:ssZ');
+  day: any;
+  date: any;
+  firstDate: any;
+  lastDate: any;
   constructor(
     private chartsData: DashboardChartsData,
     public commonService: CommonService,
@@ -123,6 +129,7 @@ export class DashboardComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.dateFromdateTo();
     this.initCharts();
     this.getUserRoleList();
     this.uiInfo();
@@ -145,10 +152,30 @@ export class DashboardComponent implements OnInit {
     this.initCharts();
   }
 
+  dateFromdateTo()
+  {
+    let numDay = new Date();
+    this.day = numDay.setDate(numDay.getDate());
+    const currentDate = new Date();
+    let first = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    let last = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    this.firstDate = moment(first).format("MMM DD, yyyy");
+    this.lastDate = moment(last).format("MMM DD, yyyy");
+  }
+
   getUserRoleList() {
     this.userEntryService.getUserList().subscribe(getData => {  
-        if (getData['isExecuted'] == true) {          
-        this.userData = getData['data'] ;
+        if (getData['isExecuted'] == true) {
+          for(let i = 0; i < getData['data'].length; i++) 
+          {
+            let numDate = new Date(getData['data'][i].created_date);
+            this.date = numDate.setDate(numDate.getDate() + 5);
+            this.userData.push({
+              userId: getData['data'][i].userId, name: getData['data'][i].name, userCategory: getData['data'][i].userCategory,
+              image: getData['data'][i].image, country: 'Bd', color: 'primary', date: this.date, usage: 43, address: getData['data'][i].address, phoneNo: getData['data'][i].phoneNo,
+              created_date: getData['data'][i].created_date,
+            })
+          }
         this.imageSrc = user.imgBase64;
         }
       });

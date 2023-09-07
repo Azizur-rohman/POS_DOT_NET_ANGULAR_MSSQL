@@ -403,13 +403,13 @@
               </td>
               <td>
                 <div>{{ user.name }}</div>
-                <!-- <div class="small text-medium-emphasis text-nowrap">
+                <div class="small text-medium-emphasis text-nowrap">
                   <span>
-                    {{ user.state }} | Registered: {{ user.registered }}
+                    {{ user.date >= day ? "New" : "Recurring" }} | Registered: {{ user.created_date | date:"MMM dd, yyyy" }}
                   </span>
-                </div> -->
+                </div>
               </td>
-              <!-- <td class="text-center">
+              <td class="text-center">
                 <svg
                   cIcon
                   id="{{ user.country + user.name }}"
@@ -425,7 +425,7 @@
                   </div>
                   <div class="float-end ms-1 text-nowrap">
                     <small class="text-medium-emphasis">
-                      {{ user.period }}
+                      {{ firstDate }} - {{ lastDate }}
                     </small>
                   </div>
                 </div>
@@ -436,7 +436,7 @@
                   ></c-progress-bar>
                 </c-progress>
               </td>
-              <td class="text-center">
+              <!-- <td class="text-center">
                 <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
               </td>
               <td>

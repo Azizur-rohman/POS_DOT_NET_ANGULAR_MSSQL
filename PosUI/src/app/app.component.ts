@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
         if (isTimedOut) {
           this.commonService.showSessionExpiredMsg('Session Expired')
           localStorage.setItem("isLoggedin", "false");
+          localStorage.setItem("hasRole", "null");
           this.router.navigateByUrl('login');
           this.bnIdle.stopTimer();
         }

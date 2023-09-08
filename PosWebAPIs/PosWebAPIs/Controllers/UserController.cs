@@ -223,6 +223,42 @@ namespace PosWebAPIs.Controllers
             }
         }
 
+        [HttpPost("update-loggedin-time/")]
+        //[Authorize(Policy = "OnlyNonBlockedCustomer")]
+        public IActionResult UpdateUserLoggedInTime(User model)
+        {
+            using (var dbTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var data = _UserService.UpdateUserLoggedInTime(_db, model);
+                    if (data)
+                    {
+                        dbTransaction.Commit();
+                        returnObj.IsExecuted = true;
+                        returnObj.Data = true;
+                        returnObj.Message = MessageConst.Update;
+                        return Ok(returnObj);
+                    }
+                    else
+                    {
+                        dbTransaction.Rollback();
+                        returnObj.IsExecuted = false;
+                        returnObj.Data = null;
+                        returnObj.Message = MessageConst.IsExist;
+                        return Ok(returnObj);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    returnObj.IsExecuted = false;
+                    returnObj.Data = null;
+                    return Ok(returnObj);
+                }
+            }
+        }
+
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {

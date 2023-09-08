@@ -15,6 +15,7 @@ namespace PosWebAPIs.Interfaces
         bool Add(List<User> model, ModelContext _db);
         User GetUserById(ModelContext _db, int Id);
         bool UpdateUserById(ModelContext _db, User model);
+        bool UpdateUserLoggedInTime(ModelContext _db, User model);
         bool DeleteUser(ModelContext _db, int id);
     }
 }

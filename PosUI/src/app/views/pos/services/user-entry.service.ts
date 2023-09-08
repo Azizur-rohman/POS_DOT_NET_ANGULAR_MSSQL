@@ -34,6 +34,10 @@ export class UserEntryService {
   public updateUser(value: any) {   
     return this.http.post(`api/user/update/`, value);
   }
+
+  public updateUserLoggedInTime(value: any) {   
+    return this.http.post(`api/user/update-loggedin-time/`, value);
+  }
 }
 
 

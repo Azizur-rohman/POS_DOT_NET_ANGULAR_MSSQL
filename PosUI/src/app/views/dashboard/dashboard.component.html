@@ -393,7 +393,7 @@
                 <c-avatar
                   size="md"
                   src="{{ user.image != null ? user.image : imageSrc }}"
-                  status="success"
+                  status="{{ user.status }}"
                 ></c-avatar>
                 <!-- <c-avatar
                 status="success"
@@ -436,13 +436,13 @@
                   ></c-progress-bar>
                 </c-progress>
               </td>
-              <!-- <td class="text-center">
+             <td class="text-center">
                 <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
               </td>
-              <td>
+               <td>
                 <div class="small text-medium-emphasis">Last login</div>
                 <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
-              </td> -->
+              </td>
             </tr>
           </tbody>
         </table>

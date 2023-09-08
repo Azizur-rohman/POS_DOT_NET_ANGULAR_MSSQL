@@ -5,7 +5,9 @@ import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { UserRoleService } from 'src/app/views/pos/services/user-role.service';
 import { UserEntryService } from 'src/app/views/pos/services/user-entry.service';
+import { MonthToSecondService } from 'src/app/views/pages/services/month-to-second.service';
 import * as moment from 'moment';
+import { UserActivityService } from '../pages/services/user-activity.service';
 const user = require('src/assets/images/empty-user.js');
 
 interface IUser {
@@ -31,14 +33,24 @@ export class DashboardComponent implements OnInit {
   userData: any = [];
   imageSrc: string = ''
   currentDate: any = moment().format('YYYY-MM-DDThh:mm:ssZ');
+  currentMonth: any = moment().format('MMMM');
   day: any;
   date: any;
   firstDate: any;
   lastDate: any;
+  months: number[] = [];
+  secondsDifference: any;
+  minutsDifference: any;
+  oursDifference: any;
+  daysDifference: any;
+  monthsDifference: any;
+  yearsDifference: any;
   constructor(
     private chartsData: DashboardChartsData,
     public commonService: CommonService,
     public userEntryService: UserEntryService,
+    public monthToSecondService: MonthToSecondService,
+    public userActivityService: UserActivityService
     ) {
   }
 
@@ -163,17 +175,47 @@ export class DashboardComponent implements OnInit {
     this.lastDate = moment(last).format("MMM DD, yyyy");
   }
 
+  getSecondsInFebruary(): number {
+    return this.monthToSecondService.getSecondsInMonth(this.currentMonth);
+  }
+
+  checkIfUserWasActive(time: number) {
+    let newDate = new Date(this.currentDate);
+    let oldDate = new Date(time);
+    let timeDifference = Math.abs(newDate.getTime() - oldDate.getTime());
+    this.secondsDifference = Math.floor(timeDifference / 1000);
+    this.minutsDifference = Math.floor(timeDifference / (1000 * 60));
+    this.oursDifference = Math.floor(timeDifference / (1000 * 3600));
+    this.daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+    this.monthsDifference = Math.floor(this.daysDifference / 30);
+    this.yearsDifference = Math.floor(this.monthsDifference / 12);
+    // console.log('check', daysDifference);
+  }
+
   getUserRoleList() {
     this.userEntryService.getUserList().subscribe(getData => {  
         if (getData['isExecuted'] == true) {
           for(let i = 0; i < getData['data'].length; i++) 
           {
+            this.checkIfUserWasActive(getData['data'][i].last_time_logout);
             let numDate = new Date(getData['data'][i].created_date);
             this.date = numDate.setDate(numDate.getDate() + 5);
             this.userData.push({
               userId: getData['data'][i].userId, name: getData['data'][i].name, userCategory: getData['data'][i].userCategory,
-              image: getData['data'][i].image, country: 'Bd', color: 'primary', date: this.date, usage: 43, address: getData['data'][i].address, phoneNo: getData['data'][i].phoneNo,
-              created_date: getData['data'][i].created_date,
+              image: getData['data'][i].image, country: 'Bd', 
+              color: Math.floor((getData['data'][i].total_looged_in_time / this.getSecondsInFebruary()) * 100) > 80 ? 'success' : 
+              Math.floor((getData['data'][i].total_looged_in_time / this.getSecondsInFebruary()) * 100) > 60 ? 'primary':
+              Math.floor((getData['data'][i].total_looged_in_time / this.getSecondsInFebruary()) * 100) > 40 ? 'info': 
+              Math.floor((getData['data'][i].total_looged_in_time / this.getSecondsInFebruary()) * 100) > 20 ? 'warning': 'danger', date: this.date, 
+              usage: Math.floor((getData['data'][i].total_looged_in_time / this.getSecondsInFebruary()) * 100), 
+              address: getData['data'][i].address, phoneNo: getData['data'][i].phoneNo, payment: 'Mastercard',
+              created_date: getData['data'][i].created_date, 
+              activity: getData['data'][i].last_time_logout == null ? 'Active Now' : 
+              this.secondsDifference != 0 && this.secondsDifference <= 60 ? this.secondsDifference + ' seconds ago' :
+              this.minutsDifference != 0 && this.minutsDifference <= 60 ? this.minutsDifference + ' minuts ago' : 
+              this.oursDifference != 0 && this.oursDifference <= 24 ? this.oursDifference + ' ours ago': 
+              this.daysDifference != 0 && this.daysDifference <= 30 ? this.daysDifference + ' days ago': null ,
+              status: getData['data'][i].last_time_logout == null ? 'success' : 'dark',
             })
           }
         this.imageSrc = user.imgBase64;

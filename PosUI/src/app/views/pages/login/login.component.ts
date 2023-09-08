@@ -18,6 +18,8 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { hasRoleGuard } from 'src/app/views/pages/services/has-role.guard';
 import { UserCategoryService } from 'src/app/views/pos/services/user-category.service';
 import { UserRoleService } from 'src/app/views/pos/services/user-role.service';
+import { UserActivityService } from 'src/app/views/pages/services/user-activity.service';
+import { UserEntryService } from '../../pos/services/user-entry.service';
 // import * as moment from 'moment';
 
 @Component({
@@ -57,6 +59,8 @@ export class LoginComponent {
   dateToErr: boolean = false;
   dateFromErr: boolean = false;
   dueToErr: boolean = false;
+  userData: any;
+  userItemArray: any = [];
 
   successMessage$ = this.notificationService.successMessageAction$.pipe(tap((message)=>{
     if(message){
@@ -86,6 +90,8 @@ export class LoginComponent {
     private toastr: ToastrService,
     private userCategoryService: UserCategoryService,
     public UserRoleService: UserRoleService,
+    private userActivityService: UserActivityService,
+    public userEntryService: UserEntryService,
   ) {}
 
   ngOnInit(): void {
@@ -153,9 +159,12 @@ export class LoginComponent {
         (add: any) => {
           if (add['isExecuted']) 
           {
+            this.userData = add['data'];
             this.loginUser = add['data'][0];
             localStorage.setItem("isLoggedin", JSON.stringify(this.loginUser));
             localStorage.setItem("hasRole", JSON.stringify(this.roleData));
+            this.updateUser();
+            this.userActivityService.startLoginTimer();
             this.commonService.removeSessionExpiredMsg();
             this.router.navigateByUrl('/dashboard');
           } 
@@ -175,7 +184,29 @@ export class LoginComponent {
     }
   };
 
-  
+  getUserItemArray()
+  {
+    for(let i=0; i< this.userData.length ; i++)
+        {
+            this.userItemArray.push({
+              id: this.userData[i].id,
+              lastTimeLogout: null,
+            })
+       }
+  }
+
+ async updateUser() {
+    await this.getUserItemArray();
+    this.userEntryService
+     .updateUserLoggedInTime(this.userItemArray[0]).subscribe(
+       (add:any) => {
+         
+       },
+       (err) => {
+         this.commonService.showErrorMsg(err.message)
+       }
+     );
+ };
 
   ngOnDestroy() {
     // if (this.authSub) {

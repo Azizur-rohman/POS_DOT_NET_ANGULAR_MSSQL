@@ -166,6 +166,10 @@ namespace PosWebAPIs.Models.DBModels
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.IsActive).HasMaxLength(1);
+
+                entity.Property(e => e.LastTimeLogout).HasColumnType("datetime");
+
                 entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(50);

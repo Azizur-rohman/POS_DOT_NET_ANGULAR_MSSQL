@@ -10,6 +10,8 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { LoaderService } from 'src/app/shared/loader/loader.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserEntryService } from 'src/app/views/pos/services/user-entry.service';
+import { UserActivityService } from 'src/app/views/pages/services/user-activity.service';
+import * as moment from 'moment';
 const user = require('src/assets/images/empty-user.js');
 
 @Component({
@@ -22,8 +24,12 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
   uiInfoSub!     : Subscription;
   asyncSub!      : Subscription;
   isLoading      : boolean = false;
+  currentDate: any = moment().format('YYYY-MM-DDThh:mm:ssZ');
   imageSrc       : string = '';
   loginUser: string= '';
+  userData: any = [];
+  userItemArray: any = [];
+  elapsedTime: any;
   successMessage$ = this.notificationService.successMessageAction$.pipe(tap((message)=>{
     if(message){
     setTimeout((message: any)=>{
@@ -53,12 +59,14 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
               private notificationService: NotificationService,
               public loaderService: LoaderService,
               public userEntryService: UserEntryService,
+              private userActivityService: UserActivityService
               ) {
     super();
   }
 
   ngOnInit(): void {
     this.authInfo();
+    this.loginTimeCount();
     this.getUserRoleList();
     this.uiInfoSub = this.commonService.uiInfo.subscribe((uiInfo: any) => {
       this.uiInfo = uiInfo;
@@ -78,26 +86,62 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
     this.loginUser = localData.userId;
   }
 
+  loginTimeCount()
+  {
+    this.elapsedTime = this.userActivityService.getElapsedLoginTime();
+    this.getUserItemArray()
+  }
+
   getUserRoleList() {
     this.userEntryService.getUserList().subscribe(getData => {  
         if (getData['isExecuted'] == true) {          
-        let userData = getData['data'] ;
-        for(let i=0; i<userData.length ; i++)
+        this.userData = getData['data'] ;
+        for(let i=0; i< this.userData.length ; i++)
         {
-          if(userData[i].userId == this.loginUser)
+          if( this.userData[i].userId == this.loginUser)
           {
-            this.imageSrc = userData[i].image != null ? userData[i].image : user.imgBase64;
+            this.imageSrc =  this.userData[i].image != null ?  this.userData[i].image : user.imgBase64;
           }
         }
         }
       });
   };
 
-  logout(){
+  getUserItemArray()
+  {
+    for(let i=0; i< this.userData.length ; i++)
+        {
+          if( this.userData[i].userId == this.loginUser)
+          {
+            this.userItemArray.push({
+              id: this.userData[i].id,
+              lastTimeLogout: this.currentDate,
+              totalLoggedInTime: this.userData[i].total_looged_in_time + Math.floor(this.elapsedTime)
+            })
+          }
+       }
+  }
+
+ async logout(){
+    await this.loginTimeCount();
     localStorage.setItem("isLoggedin", "false");
     localStorage.setItem("hasRole", "null");
+    this.userActivityService.logout();
+    this.updateUser();
     this.router.navigate(['login']);
   }
+
+  updateUser() {
+    this.userEntryService
+     .updateUserLoggedInTime(this.userItemArray[0]).subscribe(
+       (add:any) => {
+         
+       },
+       (err) => {
+         this.commonService.showErrorMsg(err.message)
+       }
+     );
+ };
 
   goBackToPath(){
     if(this.uiInfo && this.uiInfo.goBackPath) {

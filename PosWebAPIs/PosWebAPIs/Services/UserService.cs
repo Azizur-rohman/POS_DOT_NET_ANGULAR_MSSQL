@@ -26,6 +26,8 @@ namespace PosWebAPIs.Services
                            image = user.Image,
                            address = user.Address,
                            phoneNo = user.PhoneNumber,
+                           last_time_logout = user.LastTimeLogout,
+                           total_looged_in_time = user.TotalLoggedInTime,
                            created_by = user.CreatedBy,
                            created_date = user.CreatedDate
                        };
@@ -144,12 +146,49 @@ namespace PosWebAPIs.Services
                     oldData.Address = model.Address;
                     oldData.PhoneNumber = model.PhoneNumber;
                     oldData.Password = model.Password;
+                    oldData.TotalLoggedInTime = model.TotalLoggedInTime;
                     oldData.UpdatedBy = model.UpdatedBy;
                     oldData.UpdatedDate = model.UpdatedDate;
 
                     _db.Entry(oldData).State = EntityState.Modified;
                     _db.SaveChanges();
                     isSaved = true;
+                }
+            }
+            else
+            {
+                isSaved = false;
+            }
+            return isSaved;
+        }
+
+        public bool UpdateUserLoggedInTime(ModelContext _db, User model)
+        {
+            bool isSaved = false;
+
+            var isExistData = _db.Users.AsQueryable().FirstOrDefault(x => x.Id == model.Id);
+            if (isExistData != null)
+            {
+                var oldData = _db.Users.FirstOrDefault(x => x.Id == model.Id);
+                if (oldData != null)
+                {
+                    if (model.TotalLoggedInTime == null)
+                    {
+                        oldData.LastTimeLogout = model.LastTimeLogout;
+
+                        _db.Entry(oldData).State = EntityState.Modified;
+                        _db.SaveChanges();
+                        isSaved = true;
+                    }
+                    else
+                    {
+                        oldData.LastTimeLogout = model.LastTimeLogout;
+                        oldData.TotalLoggedInTime = model.TotalLoggedInTime;
+
+                        _db.Entry(oldData).State = EntityState.Modified;
+                        _db.SaveChanges();
+                        isSaved = true;
+                    }
                 }
             }
             else

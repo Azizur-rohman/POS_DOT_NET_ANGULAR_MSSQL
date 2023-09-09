@@ -1,0 +1,149 @@
+   // menu-path
+   {
+      "id": 5,
+      "path": "category",
+      "path_id": "005",
+      "created_by": "aziz",
+      "created_date": "2023-09-04T22:22:48"
+    },
+    {
+      "id": 6,
+      "path": "category/view",
+      "path_id": "006",
+      "created_by": "aziz",
+      "created_date": "2023-09-04T22:22:48"
+    },
+    {
+      "id": 7,
+      "path": "user-category",
+      "path_id": "007",
+      "created_by": "aziz",
+      "created_date": "2023-09-04T22:23:39"
+    },
+    {
+      "id": 8,
+      "path": "user-category/view",
+      "path_id": "008",
+      "created_by": "aziz",
+      "created_date": "2023-09-04T22:23:39"
+    },
+    {
+      "id": 9,
+      "path": "user",
+      "path_id": "009",
+      "created_by": "aziz",
+      "created_date": "2023-09-04T22:29:44"
+    },
+    {
+      "id": 10,
+      "path": "user/view",
+      "path_id": "010",
+      "created_by": "aziz",
+      "created_date": "2023-09-04T22:29:44"
+    },
+    {
+      "id": 1,
+      "path": "menu-path",
+      "path_id": "001",
+      "created_by": "aziz",
+      "created_date": "2023-09-05T05:09:37.147"
+    },
+    {
+      "id": 2,
+      "path": "menu-path/view",
+      "path_id": "002",
+      "created_by": "aziz",
+      "created_date": "2023-09-05T05:09:37.147"
+    },
+    {
+      "id": 3,
+      "path": "user-role",
+      "path_id": "003",
+      "created_by": "aziz",
+      "created_date": "2023-09-05T05:09:37.147"
+    },
+    {
+      "id": 4,
+      "path": "user-role/view",
+      "path_id": "004",
+      "created_by": "aziz",
+      "created_date": "2023-09-05T05:09:37.147"
+    }
+
+
+// end
+
+//start
+// user-role
+  {
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "001",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "002",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "003",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "004",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "005",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "006",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "007",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },
+{
+    "id": 0,
+    "userCategory": "001",
+    "pathId": "008",
+    "createdBy": "aziz",
+    "createdDate": "2023-09-09T09:37:51.571Z",
+    "updatedBy": "string",
+    "updatedDate": "2023-09-09T09:37:51.571Z"
+  },

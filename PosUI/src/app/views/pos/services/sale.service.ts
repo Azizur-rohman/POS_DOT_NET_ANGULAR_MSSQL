@@ -23,10 +23,11 @@ export class SaleService {
     return this.http.get(`api/sale/view`);
   }
 
+  public getOrderDetailList() : Observable<any> {   
+    return this.http.get(`api/sale/view-order-details`);
+  }
+
   public getSaleDetailList(order_no: string) : Observable<any> { 
-    
-    console.log('order', order_no);
-      
     return this.http.get(`api/sale/view-detail/` + order_no);
   }
 

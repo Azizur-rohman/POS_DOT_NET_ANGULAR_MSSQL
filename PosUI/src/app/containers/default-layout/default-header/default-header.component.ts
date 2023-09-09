@@ -100,7 +100,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
         {
           if( this.userData[i].userId == this.loginUser)
           {
-            this.imageSrc =  this.userData[i].image != null ?  this.userData[i].image : user.imgBase64;
+            this.imageSrc =  this.userData[i].image ?  this.userData[i].image : user.imgBase64;
           }
         }
         }

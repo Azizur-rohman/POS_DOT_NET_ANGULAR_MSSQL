@@ -58,6 +58,39 @@ namespace PosWebAPIs.Controllers
             return Ok(returnObj);
         }
 
+        [HttpGet("view-order-details")]
+        //[Authorize(Policy = "OnlyNonBlockedCustomer")]
+        public IActionResult GetOrderDetails()
+        {
+            try
+            {
+                var data = _SaleService.GetOrderDetails(_db);
+
+                if (data != null)
+                {
+                    returnObj.IsExecuted = true;
+                    returnObj.Data = data;
+                    return Ok(returnObj);
+                }
+                else
+                {
+                    returnObj.IsExecuted = false;
+                    returnObj.Message = MessageConst.NotFound;
+                    returnObj.Data = null;
+                    return Ok(returnObj);
+                }
+            }
+            catch (Exception ex)
+            {
+                returnObj.IsExecuted = false;
+                returnObj.Message = ex.Message;
+                returnObj.Data = null;
+                return Ok(returnObj);
+            }
+
+            return Ok(returnObj);
+        }
+
         [HttpGet("view-detail/{order_no}")]
         //[Authorize(Policy = "OnlyNonBlockedCustomer")]
         public IActionResult GetAllDetail(string order_no)

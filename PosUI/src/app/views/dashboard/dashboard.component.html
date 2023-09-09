@@ -392,7 +392,7 @@
               <td class="text-center">
                 <c-avatar
                   size="md"
-                  src="{{ user.image != null ? user.image : imageSrc }}"
+                  src="{{ user.image ? user.image : imageSrc }}"
                   status="{{ user.status }}"
                 ></c-avatar>
                 <!-- <c-avatar

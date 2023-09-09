@@ -53,6 +53,11 @@
 
             <ng-container matColumnDef="view">
                 <th style="width: 10%; text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header> View Sale Detail </th>
+                <td mat-cell style="text-align: center;" *matCellDef="let element"><mat-icon (click)="viewDetails(element.order_no)" style="cursor:pointer">preview</mat-icon></td>
+            </ng-container> 
+
+            <ng-container matColumnDef="report">
+                <th style="width: 10%; text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header> View Report </th>
                 <td mat-cell style="text-align: center;" *matCellDef="let element"><mat-icon (click)="viewReports(element.order_no)" style="cursor:pointer">preview</mat-icon></td>
             </ng-container> 
     
@@ -68,7 +73,7 @@
             <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
     
             <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="8">No data matching the filter"</td>
+                <td class="mat-cell" colspan="9">No data matching the filter"</td>
             </tr>
         </table>
         <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>

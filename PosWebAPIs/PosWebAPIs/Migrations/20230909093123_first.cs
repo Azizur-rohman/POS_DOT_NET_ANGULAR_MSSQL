@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PosWebAPIs.Migrations
 {
-    public partial class Hosting : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -143,6 +143,9 @@ namespace PosWebAPIs.Migrations
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     PhoneNumber = table.Column<string>(type: "nchar(14)", fixedLength: true, maxLength: 14, nullable: true),
+                    LastTimeLogout = table.Column<DateTime>(type: "datetime", nullable: true),
+                    TotalLoggedInTime = table.Column<int>(type: "int", nullable: true),
+                    IsActive = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),

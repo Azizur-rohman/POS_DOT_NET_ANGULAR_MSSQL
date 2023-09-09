@@ -146,7 +146,6 @@ namespace PosWebAPIs.Services
                     oldData.Address = model.Address;
                     oldData.PhoneNumber = model.PhoneNumber;
                     oldData.Password = model.Password;
-                    oldData.TotalLoggedInTime = model.TotalLoggedInTime;
                     oldData.UpdatedBy = model.UpdatedBy;
                     oldData.UpdatedDate = model.UpdatedDate;
 

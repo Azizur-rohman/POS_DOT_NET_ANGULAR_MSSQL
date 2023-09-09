@@ -10,8 +10,8 @@ using PosWebAPIs.Models.DBModels;
 namespace PosWebAPIs.Migrations
 {
     [DbContext(typeof(ModelContext))]
-    [Migration("20230903201528_Hosting")]
-    partial class Hosting
+    [Migration("20230909093123_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -293,6 +293,13 @@ namespace PosWebAPIs.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IsActive")
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime?>("LastTimeLogout")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -305,6 +312,9 @@ namespace PosWebAPIs.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nchar(14)")
                         .IsFixedLength(true);
+
+                    b.Property<int?>("TotalLoggedInTime")
+                        .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)

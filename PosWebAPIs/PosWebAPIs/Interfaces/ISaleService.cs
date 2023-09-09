@@ -9,6 +9,7 @@ namespace PosWebAPIs.Interfaces
     public interface ISaleService
     {
         dynamic GetAll(ModelContext _db);
+        dynamic GetOrderDetails(ModelContext _db);
         dynamic GetAllDetail(ModelContext _db, string order_no);
         bool DuplicateCheck(ModelContext _db, Category model);
         bool Add(SaleFormDataModel model, ModelContext _db);

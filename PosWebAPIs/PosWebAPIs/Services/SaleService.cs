@@ -206,6 +206,29 @@ namespace PosWebAPIs.Services
             return data;
         }
 
+        public dynamic GetOrderDetails(ModelContext _db)
+        {
+            var detailsData = (from sl in _db.SaleDetails.AsNoTracking().ToList()
+                               select new
+                               {
+                                   id = (decimal)sl.Id,
+                                   order_no = sl.OrderNo,
+                                   category_code = sl.CategoryCode,
+                                   category_name = _db.Categories.AsNoTracking().FirstOrDefault(x => x.CategoryCode == sl.CategoryCode)?.Name,
+                                   product_code = sl.ProductCode,
+                                   product_name = _db.Products.AsNoTracking().FirstOrDefault(x => x.ProductCode == sl.ProductCode)?.Name,
+                                   image = _db.Products.AsNoTracking().FirstOrDefault(x => x.ProductCode == sl.ProductCode)?.Image,
+                                   sale_price = sl.SalePrice,
+                                   quantity = sl.Quantity,
+                                   sub_total_amount = sl.SubTotalAmount,
+                                   created_by = sl.CreatedBy,
+                                   created_date = sl.CreatedDate
+
+                               }).OrderBy(x => x.id);
+
+            return detailsData;
+        }
+
         public dynamic GetAllDetail(ModelContext _db, string order_no)
         {
             var detailsData = (from sl in _db.SaleDetails.AsNoTracking().ToList()
@@ -218,6 +241,7 @@ namespace PosWebAPIs.Services
                                    category_name = _db.Categories.AsNoTracking().FirstOrDefault(x => x.CategoryCode == sl.CategoryCode)?.Name,
                                    product_code = sl.ProductCode,
                                    product_name = _db.Products.AsNoTracking().FirstOrDefault(x => x.ProductCode == sl.ProductCode)?.Name,
+                                   image = _db.Products.AsNoTracking().FirstOrDefault(x => x.ProductCode == sl.ProductCode)?.Image,
                                    sale_price = sl.SalePrice,
                                    quantity = sl.Quantity,
                                    sub_total_amount = sl.SubTotalAmount,

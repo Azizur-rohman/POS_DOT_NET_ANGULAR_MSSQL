@@ -53,7 +53,7 @@
 
             <ng-container matColumnDef="quantity">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
-                <td mat-cell align="center" [ngClass]="{'red-text': element.quantity <= 5}" style="text-align: center;" *matCellDef="let element"> {{element.quantity}} </td>
+                <td mat-cell align="center" [ngClass]="{'red-text': element.quantity <= 5, 'span': element.quantity == 0}" style="text-align: center;" *matCellDef="let element"> {{element.quantity}} </td>
             </ng-container>
 
             <ng-container matColumnDef="created_by">

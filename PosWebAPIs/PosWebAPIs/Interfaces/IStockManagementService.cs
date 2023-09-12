@@ -9,6 +9,7 @@ namespace PosWebAPIs.Interfaces
     public interface IStockManagementService
     {
         dynamic GetAll(ModelContext _db);
+        dynamic GetAllProductPurchaseHistory(ModelContext _db);
         bool DuplicateCheck(ModelContext _db, StockManagement model);
         bool Add(List<StockManagement> model, ModelContext _db);
         StockManagement GetStockManagementById(ModelContext _db, int Id);

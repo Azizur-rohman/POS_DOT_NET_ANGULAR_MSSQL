@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PosWebAPIs.Models.DBModels
 {
-    public partial class StockManagement
+    public partial class ProductPurchaseHistory
     {
         public int Id { get; set; }
         public string Category { get; set; }

@@ -92,7 +92,7 @@ export class AddStockManagementComponent {
       name:[''],
       category: ['', Validators.required],
       image: [''],
-      product_price: [null],
+      PurchasePrice: [null],
       salePrice: [null, Validators.required],
       quantity: [null, Validators.required],
       createdBy: [this.loginUser],
@@ -154,6 +154,9 @@ export class AddStockManagementComponent {
     this.productList = this.fetchList.filter((x: any)=> x.category_code == event.target.value)
     const newItem = {name : '--Select Product--'};
     this.productList.unshift(newItem);
+    this.imageSrc = '';
+    this.stockManagementForm.get('PurchasePrice').setValue(null);
+    this.stockManagementForm.get('salePrice').setValue(null);
 
   }
 
@@ -161,8 +164,8 @@ export class AddStockManagementComponent {
     let name = this.fetchList.find((x: any)=> x.product_code == event.target.value)?.name;
     this.imageSrc = this.fetchList.find((x: any)=> x.product_code == event.target.value)?.image;
     let productPrice = this.fetchList.find((x: any)=> x.product_code == event.target.value)?.price;
-    this.stockManagementForm.get('product_price').setValue(productPrice)
-    this.stockManagementForm.get('salePrice').setValue(productPrice)
+    this.stockManagementForm.get('PurchasePrice').setValue(productPrice);
+    this.stockManagementForm.get('salePrice').setValue(productPrice);
     this.stockManagementForm.get('name')?.setValue(name);
     
   }
@@ -178,7 +181,7 @@ export class AddStockManagementComponent {
           if(this.fetchList[i].product_code == singleData.data.product)
           {
             this.imageSrc = this.fetchList[i].image;
-            this.stockManagementForm.get('product_price').setValue(this.fetchList[i].price)
+            this.stockManagementForm.get('PurchasePrice').setValue(this.fetchList[i].price)
           }
          }
        }

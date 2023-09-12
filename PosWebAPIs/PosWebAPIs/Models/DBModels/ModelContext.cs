@@ -20,6 +20,7 @@ namespace PosWebAPIs.Models.DBModels
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<MenuPath> MenuPaths { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductPurchaseHistory> ProductPurchaseHistories { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SaleDetail> SaleDetails { get; set; }
         public virtual DbSet<StockManagement> StockManagements { get; set; }
@@ -93,6 +94,31 @@ namespace PosWebAPIs.Models.DBModels
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<ProductPurchaseHistory>(entity =>
+            {
+                entity.ToTable("Product_Purchase_History");
+
+                entity.Property(e => e.Category).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Product).HasMaxLength(50);
+
+                entity.Property(e => e.PurchasePrice)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("Purchase_Price");
+
+                entity.Property(e => e.SalePrice)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("Sale_Price");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Sale>(entity =>
             {
                 entity.ToTable("Sale");
@@ -146,6 +172,10 @@ namespace PosWebAPIs.Models.DBModels
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Product).HasMaxLength(50);
+
+                entity.Property(e => e.PurchasePrice)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("Purchase_Price");
 
                 entity.Property(e => e.SalePrice)
                     .HasColumnType("decimal(18, 0)")

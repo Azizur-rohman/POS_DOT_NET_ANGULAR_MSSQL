@@ -58,6 +58,39 @@ namespace PosWebAPIs.Controllers
             return Ok(returnObj);
         }
 
+        [HttpGet("view-all-product-purchase-history")]
+        //[Authorize(Policy = "OnlyNonBlockedCustomer")]
+        public IActionResult GetAllProductPurchaseHistory()
+        {
+            try
+            {
+                var data = _StockManagementService.GetAllProductPurchaseHistory(_db);
+
+                if (data != null)
+                {
+                    returnObj.IsExecuted = true;
+                    returnObj.Data = data;
+                    return Ok(returnObj);
+                }
+                else
+                {
+                    returnObj.IsExecuted = false;
+                    returnObj.Message = MessageConst.NotFound;
+                    returnObj.Data = null;
+                    return Ok(returnObj);
+                }
+            }
+            catch (Exception ex)
+            {
+                returnObj.IsExecuted = false;
+                returnObj.Message = ex.Message;
+                returnObj.Data = null;
+                return Ok(returnObj);
+            }
+
+            return Ok(returnObj);
+        }
+
         [HttpPost]
         [Route("duplicate-check")]
         public IActionResult DuplicateCheck(StockManagement model)

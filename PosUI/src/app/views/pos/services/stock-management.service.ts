@@ -24,6 +24,10 @@ export class StockManagementService {
     return this.http.get(`api/stock-management/view`);
   }
 
+  public getProductPurchaseHistoryList() : Observable<any> {   
+    return this.http.get(`api/stock-management/view-all-product-purchase-history`);
+  }
+
   public addStockManagement(value: any) {   
     return this.http.post(`api/stock-management/add`, value);
   }

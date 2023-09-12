@@ -9,6 +9,10 @@ import {
 } from '@angular/core';
 import { getStyle } from '@coreui/utils';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { StockManagementService } from '../../pos/services/stock-management.service';
+import { CommonService } from 'src/app/shared/services/common.service';
+import { Subscription } from 'rxjs';
+import { SaleService } from '../../pos/services/sale.service';
 
 @Component({
   selector: 'app-widgets-dropdown',
@@ -17,9 +21,21 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
-
+  subscription?       : Subscription;
+  delSub?            : Subscription;
+  fetch_data        : any;
+  saleData        : any;
+  message           : string = '';
+  productTotalAmount: number = 0;
+  saleTotalAmount: number = 0;
+  quantityTotalAmount: number = 0;
+  grandTotalAmount: number = 0;
+  totalSaleAmount: number = 0;
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    public stockManagementService: StockManagementService,
+    public commonService: CommonService,
+    public saleService: SaleService,
   ) {}
 
   data: any[] = [];
@@ -116,6 +132,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   };
 
   ngOnInit(): void {
+    this.getProductList();
+    this.getSaleList();
     this.setData();
   }
 
@@ -123,6 +141,58 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     this.changeDetectorRef.detectChanges();
 
   }
+
+  getProductList() {
+    // this.asyncService.start();
+    this.productTotalAmount = 0;
+    this.saleTotalAmount = 0;
+    this.quantityTotalAmount = 0;
+    this.grandTotalAmount = 0;
+    this.subscription =
+    this.stockManagementService.getProductPurchaseHistoryList().subscribe(getData => {  
+      if (getData['isExecuted'] == true) {          
+      this.fetch_data = getData['data'] ;
+      for( let i=0; i < getData['data'].length; i++)
+      {
+         this.productTotalAmount += getData['data'][i].purchase_price;
+         this.saleTotalAmount += getData['data'][i].sale_price;
+         this.quantityTotalAmount += getData['data'][i].quantity;
+      }
+      this.grandTotalAmount = this.productTotalAmount * this.quantityTotalAmount
+      this.getformatPurchase();
+      }
+      else {
+        this.commonService.showErrorMsg(getData['message']);
+      }
+      // this.asyncService.finish();
+    }, (err) => {
+      // this.asyncService.finish();
+      this.commonService.showErrorMsg(err.message);
+    })
+  };
+
+  getSaleList() {
+    // this.asyncService.start();
+    this.totalSaleAmount = 0;
+    this.subscription =
+      this.saleService.getSaleList().subscribe(getData => {
+        if (getData['isExecuted'] == true) {
+          this.saleData = getData['data'];
+          for( let i=0; i < getData['data'].length; i++)
+            {
+              this.totalSaleAmount += getData['data'][i].grand_total_amount;
+            }
+          this.getformatSale();
+        }
+        else {
+          this.commonService.showErrorMsg(getData['message']);
+        }
+        // this.asyncService.finish();
+      }, (err) => {
+        // this.asyncService.finish();
+        this.commonService.showErrorMsg(err.message);
+      })
+  };
 
   setData() {
     for (let idx = 0; idx < 4; idx++) {
@@ -133,6 +203,60 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     }
     this.setOptions();
   }
+
+  getformatPurchase(){
+    if(this.grandTotalAmount == 0) {
+    return 0;
+}
+else
+{        
+  // hundreds
+  if(this.grandTotalAmount <= 999){
+    return this.grandTotalAmount ;
+  }
+  // thousands
+  else if(this.grandTotalAmount >= 1000 && this.grandTotalAmount <= 999999){
+    return (this.grandTotalAmount / 1000) + 'K';
+  }
+  // millions
+  else if(this.grandTotalAmount >= 1000000 && this.grandTotalAmount <= 999999999){
+    return (this.grandTotalAmount / 1000000) + 'M';
+  }
+  // billions
+  else if(this.grandTotalAmount >= 1000000000 && this.grandTotalAmount <= 999999999999){
+    return (this.grandTotalAmount / 1000000000) + 'B';
+  }
+  else
+    return this.grandTotalAmount ;
+  }
+}
+
+getformatSale(){
+  if(this.totalSaleAmount == 0) {
+  return 0;
+}
+else
+{        
+// hundreds
+if(this.totalSaleAmount <= 999){
+  return this.totalSaleAmount ;
+}
+// thousands
+else if(this.totalSaleAmount >= 1000 && this.totalSaleAmount <= 999999){
+  return (this.totalSaleAmount / 1000) + 'K';
+}
+// millions
+else if(this.totalSaleAmount >= 1000000 && this.totalSaleAmount <= 999999999){
+  return (this.totalSaleAmount / 1000000) + 'M';
+}
+// billions
+else if(this.totalSaleAmount >= 1000000000 && this.totalSaleAmount <= 999999999999){
+  return (this.totalSaleAmount / 1000000000) + 'B';
+}
+else
+  return this.totalSaleAmount ;
+}
+}
 
   setOptions() {
     for (let idx = 0; idx < 4; idx++) {

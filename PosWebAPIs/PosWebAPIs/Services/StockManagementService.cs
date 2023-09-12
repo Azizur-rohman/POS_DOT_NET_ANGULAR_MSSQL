@@ -107,7 +107,31 @@ namespace PosWebAPIs.Services
 
                        };
 
-            return data.Distinct().OrderBy(x=>x.created_date);
+            return data.Distinct().OrderByDescending(x=>x.id);
+        }
+
+        public dynamic GetAllProductPurchaseHistory(ModelContext _db)
+        {
+            //string base64Image = Convert.ToBase64String(imageBytes);
+            var data = from a in _db.ProductPurchaseHistories.AsNoTracking().ToList()
+                       select new
+                       {
+
+                           id = (decimal)a.Id,
+                           productCode = a.Product,
+                           product = _db.Products.FirstOrDefault(x => x.ProductCode == a.Product)?.Name,
+                           categoryCode = a.Category,
+                           category = _db.Categories.FirstOrDefault(x => x.CategoryCode == a.Category)?.Name,
+                           image = _db.Products.FirstOrDefault(x => x.ProductCode == a.Product)?.Image,
+                           purchase_price = a.PurchasePrice,
+                           sale_price = a.SalePrice,
+                           quantity = a.Quantity,
+                           created_by = a.CreatedBy,
+                           created_date = a.CreatedDate
+
+                       };
+
+            return data.Distinct().OrderByDescending(x => x.id);
         }
 
         public bool DuplicateCheck(ModelContext _db, StockManagement model)
@@ -126,8 +150,6 @@ namespace PosWebAPIs.Services
         {
             bool isSaved = false;
 
-            var CategoryList = new List<StockManagement>();
-
             foreach (var i in model)
             {
                 var obj = new StockManagement();
@@ -140,7 +162,19 @@ namespace PosWebAPIs.Services
                     obj.CreatedDate = i.CreatedDate;
                 }
 
+                var objProductPurchaseHistory = new ProductPurchaseHistory();
+                {
+                    objProductPurchaseHistory.Product = i.Product;
+                    objProductPurchaseHistory.Category = i.Category;
+                    objProductPurchaseHistory.PurchasePrice = i.PurchasePrice;
+                    objProductPurchaseHistory.SalePrice = i.SalePrice;
+                    objProductPurchaseHistory.Quantity = i.Quantity;
+                    objProductPurchaseHistory.CreatedBy = i.CreatedBy;
+                    objProductPurchaseHistory.CreatedDate = i.CreatedDate;
+                }
+
                 _db.StockManagements.AddRange(obj);
+                _db.ProductPurchaseHistories.AddRange(objProductPurchaseHistory);
                 _db.SaveChanges();
             };
             isSaved = true;

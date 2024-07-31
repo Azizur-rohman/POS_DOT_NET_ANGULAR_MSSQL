@@ -28,6 +28,8 @@ export class ViewMenuPathComponent {
   displayedColumns = [
     'index',
     'path_id',
+    'menu', 
+    'sub_menu', 
     'path', 
     'created_by',
     'created_date',

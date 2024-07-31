@@ -20,6 +20,8 @@ import { UserCategoryService } from 'src/app/views/pos/services/user-category.se
 import { UserRoleService } from 'src/app/views/pos/services/user-role.service';
 import { UserActivityService } from 'src/app/views/pages/services/user-activity.service';
 import { UserEntryService } from '../../pos/services/user-entry.service';
+import { MenuPathService } from '../../pos/services/menu-path.service';
+import { MenuService } from '../../pos/services/menu.service';
 // import * as moment from 'moment';
 
 @Component({
@@ -39,16 +41,13 @@ export class LoginComponent {
   loginUser: string= '';
   inputValue: string= '';
   roleData: any = [];
+  menuData: any = [];
+  menuPathData: any = [];
   displayBranch: string = '';
   displayDesig: string = '';
   displayJoin: any;
   displayConfirm: any;
   empInfo: any;
-  // authSub: Subscription;
-  // duplicateSub: Subscription;
-  // addSub: Subscription;
-  // paramSub: Subscription;
-  // empListSub: Subscription;
   itemArray: any = [];
   statusFlag: any = [
     { code: 'Y', description: 'Yes' },
@@ -92,6 +91,8 @@ export class LoginComponent {
     public UserRoleService: UserRoleService,
     private userActivityService: UserActivityService,
     public userEntryService: UserEntryService,
+    public menuPathService: MenuPathService,
+    public menuService: MenuService,
   ) {}
 
   ngOnInit(): void {
@@ -99,55 +100,29 @@ export class LoginComponent {
     // this.formInfo();
     // this.uiInfo();
     this.getUserRoleList();
+    this.getMenuList();
+    this.getMenuPathList();
   }
-
-  // get f() {
-  //   return this.form.controls;
-  // }
-
-  // uiInfo() {
-  //   this.commonService.setUiInfo({
-  //     title: this.paramId ? 'Update LFA Due Date' : 'Add LFA Due Date',
-  //     editPath: '/leave-feature/lfa-due-date/view',
-  //     formId: this.formId,
-  //   });
-  // }
-
-  // authInfo() {
-  //   this.authSub = this.authService.authInfo.subscribe((data) => {
-  //     this.loginUser = data['usercode'];
-  //   });
-  // }
-
-  // formInfo() {
-  //   this.form = this.fb.group({
-  //     id: [0],
-  //     name: [''],
-  //     password: [''],
-  //   });
-  // }
-
-  // onSaveConfirmation = (): void => {
-  //   if (this.form.valid) {
-  //       this.commonService.showDialog(
-  //         {
-  //           title: this.paramId
-  //             ? 'Confirmation - Update Record'
-  //             : 'Confirmation - Save Record',
-  //           content: this.paramId
-  //             ? 'Do you want to update record?'
-  //             : 'Do you want to save record?',
-  //         },
-  //         () => this.addLfaDueDate()
-  //       );
-  //   } else {
-  //     this.commonService.showErrorMsg('Please fill up with valid data!!!');
-  //   }
-  // };
   getUserRoleList() {
     this.UserRoleService.getUserRoleList().subscribe(getData => {  
         if (getData['isExecuted'] == true) {          
         this.roleData = getData['data'] ;
+        }
+      });
+  };
+
+  getMenuList() {
+    this.menuService.getMenuList().subscribe(getData => {  
+        if (getData['isExecuted'] == true) {          
+        this.menuData = getData['data'] ;
+        }
+      });
+  };
+
+  getMenuPathList() {
+    this.menuPathService.getMenuPathList().subscribe(getData => {  
+        if (getData['isExecuted'] == true) {          
+        this.menuPathData = getData['data'] ;
         }
       });
   };
@@ -163,6 +138,8 @@ export class LoginComponent {
             this.loginUser = add['data'][0];
             localStorage.setItem("isLoggedin", JSON.stringify(this.loginUser));
             localStorage.setItem("hasRole", JSON.stringify(this.roleData));
+            localStorage.setItem("menu", JSON.stringify(this.menuData));
+            localStorage.setItem("menuPath", JSON.stringify(this.menuPathData));
             this.updateUser();
             this.userActivityService.startLoginTimer();
             this.commonService.removeSessionExpiredMsg();

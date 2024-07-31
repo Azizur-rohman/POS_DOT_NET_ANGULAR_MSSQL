@@ -8,17 +8,17 @@ using PosWebAPIs.Models.DBModels;
 
 namespace PosWebAPIs.Services
 {
-    public class MenuPathService : IMenuPathService
+    public class MenuService : IMenuService
     {
-        public bool DeleteMenuPath(ModelContext _db, int id)
+        public bool DeleteMenu(ModelContext _db, int id)
         {
             bool isSaved = false;
             try
             {
-                var data = _db.MenuPaths.FirstOrDefault(x => x.Id == id);
+                var data = _db.Menus.FirstOrDefault(x => x.Id == id);
                 if (data != null)
                 {
-                    _db.MenuPaths.Remove(data);
+                    _db.Menus.Remove(data);
                     _db.SaveChanges();
                 }
                 isSaved = true;
@@ -30,19 +30,18 @@ namespace PosWebAPIs.Services
             return isSaved;
         }
 
-        public bool UpdateMenuPathById(ModelContext _db, MenuPath model)
+        public bool UpdateMenuById(ModelContext _db, Menu model)
         {
             bool isSaved = false;
 
-            var isExistData = _db.MenuPaths.AsQueryable().FirstOrDefault(x => x.SubMenu == model.SubMenu && x.MenuId == model.MenuId && x.Path == model.Path);
+            var isExistData = _db.Menus.AsQueryable().FirstOrDefault(x => x.MenuName == model.MenuName && x.MenuPath == model.MenuPath);
             if (isExistData == null)
             {
-                var oldData = _db.MenuPaths.FirstOrDefault(x => x.Id == model.Id);
+                var oldData = _db.Menus.FirstOrDefault(x => x.Id == model.Id);
                 if (oldData != null)
                 {
-                    oldData.Path = model.Path;
-                    oldData.MenuId = model.MenuId;
-                    oldData.SubMenu = model.SubMenu;
+                    oldData.MenuName = model.MenuName;
+                    oldData.MenuPath = model.MenuPath;
                     oldData.UpdatedBy = model.UpdatedBy;
                     oldData.UpdatedDate = model.UpdatedDate;
 
@@ -58,19 +57,18 @@ namespace PosWebAPIs.Services
             return isSaved;
         }
 
-        public MenuPath GetMenuPathById(ModelContext _db, int Id)
+        public Menu GetMenuById(ModelContext _db, int Id)
         {
 
-            var data = _db.MenuPaths.FirstOrDefault(x => x.Id == Id);
+            var data = _db.Menus.FirstOrDefault(x => x.Id == Id);
             if (data != null)
             {
-                var getData = new MenuPath();
+                var getData = new Menu();
 
                 getData.Id = data.Id;
+                getData.MenuName = data.MenuName;
+                getData.MenuPath = data.MenuPath;
                 getData.MenuId = data.MenuId;
-                getData.SubMenu = data.SubMenu;
-                getData.Path = data.Path;
-                getData.PathId = data.PathId;
                 getData.CreatedBy = data.CreatedBy;
                 getData.CreatedDate = data.CreatedDate;
                 getData.UpdatedBy = data.UpdatedBy;
@@ -87,27 +85,30 @@ namespace PosWebAPIs.Services
 
         public dynamic GetAll(ModelContext _db)
         {
-            var data = from ct in _db.MenuPaths.AsNoTracking().ToList()
+            var data = from ct in _db.Menus.AsNoTracking().ToList()
                        select new
                        {
                            id = (decimal)ct.Id,
-                           menu = ct.MenuId,
-                           menu_name = _db.Menus.FirstOrDefault(x => x.MenuId == ct.MenuId)?.MenuName,
-                           sub_menu = ct.SubMenu,
-                           path = ct.Path,
-                           path_id = ct.PathId,
+                           menu_name = ct.MenuName,
+                           menu_path = ct.MenuPath,
+                           menu_id = ct.MenuId,
                            created_by = ct.CreatedBy,
-                           created_date = ct.CreatedDate
+                           created_date = ct.CreatedDate,
+                           children = _db.MenuPaths.AsQueryable().Where(x => x.MenuId == ct.MenuId)
+                                     .Select(x=> new {
+                                         name = x.SubMenu,
+                                         url = ct.MenuPath + "/" + x.Path
+                                     }).ToList(),
 
                        };
 
             return data.Distinct().OrderBy(x=>x.created_date);
         }
 
-        public bool DuplicateCheck(ModelContext _db, MenuPath model)
+        public bool DuplicateCheck(ModelContext _db, Menu model)
         {
             bool isDuplicate = false;
-            var data = _db.MenuPaths.AsQueryable().FirstOrDefault(x => x.SubMenu == model.SubMenu && x.MenuId == model.MenuId || x.Path == model.Path);
+            var data = _db.Menus.AsQueryable().FirstOrDefault(x => x.MenuPath == model.MenuPath || x.MenuName == model.MenuName);
             if (data != null)
             {
                 isDuplicate = true;
@@ -116,39 +117,38 @@ namespace PosWebAPIs.Services
             return isDuplicate;
         }
 
-        public bool Add(List<MenuPath> model, ModelContext _db)
+        public bool Add(List<Menu> model, ModelContext _db)
         {
             bool isSaved = false;
             string serial;
             int taracNumber = 1;
 
-            var MenuPathList = new List<MenuPath>();
+            var MenuList = new List<Menu>();
             
             foreach (var i in model)
             {
-                var last = _db.MenuPaths.OrderByDescending(x => x.Id).FirstOrDefault();
+                var last = _db.Menus.OrderByDescending(x => x.Id).FirstOrDefault();
                 if (last == null)
                     serial = "001";
                 else
                 {
-                    taracNumber = int.Parse(last.PathId) + 1;
+                    taracNumber = int.Parse(last.MenuId) + 1;
                     if (taracNumber.ToString().Length >= 3)
                         serial = taracNumber.ToString();
                     else
                         serial = taracNumber.ToString()
                             .PadLeft(3, '0');
                 }
-                var obj = new MenuPath();
+                var obj = new Menu();
                 {
-                    obj.Path = i.Path;
-                    obj.MenuId = i.MenuId;
-                    obj.SubMenu = i.SubMenu;
-                    obj.PathId = serial;
+                    obj.MenuName = i.MenuName;
+                    obj.MenuPath = i.MenuPath;
+                    obj.MenuId = serial;
                     obj.CreatedBy = i.CreatedBy;
                     obj.CreatedDate = i.CreatedDate;
                 }
 
-                _db.MenuPaths.AddRange(obj);
+                _db.Menus.AddRange(obj);
                 _db.SaveChanges();
             };
             isSaved = true;

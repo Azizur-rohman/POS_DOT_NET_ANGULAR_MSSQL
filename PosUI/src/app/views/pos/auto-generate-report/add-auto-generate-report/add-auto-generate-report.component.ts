@@ -12,34 +12,31 @@ import { Router, ActivatedRoute } from '@angular/router';
 // import { AsyncService } from 'src/app/shared/services/async.service';
 import { IApiResponse } from 'src/app/shared/container/api-response.model';
 import { ToastrService } from 'ngx-toastr';
-import { MenuPathService } from 'src/app/views/pos/services/menu-path.service';
+import { CategoryService } from 'src/app/views/pos/services/category.service';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { debounceTime, switchMap, tap } from 'rxjs/operators';
 import * as moment from 'moment';
-import { MenuService } from '../../services/menu.service';
 
 @Component({
-  selector: 'app-add-menu-path',
-  templateUrl: './add-menu-path.component.html',
-  styleUrls: ['./add-menu-path.component.scss']
+  selector: 'app-add-auto-generate-report',
+  templateUrl: './add-auto-generate-report.component.html',
+  styleUrls: ['./add-auto-generate-report.component.scss']
 })
-export class AddMenuPathComponent {
+export class AddAutoGenerateReportComponent {
 
   public favoriteColor = '#26ab3c';
-  formId = 'menu-path';
-  menuPathForm: any = FormGroup;
+  formId = 'category';
+  categoryForm: any = FormGroup;
   paramId: number = 0;
   currentDate: any = moment().format('YYYY-MM-DDThh:mm:ssZ');
   loginUser: string= '';
   // authSub: Subscription;
   duplicateSub?: Subscription;
-  subscription?: Subscription;
   // addSub: Subscription;
   // paramSub: Subscription;
   // empListSub: Subscription;
   itemArray: any = [];
-  menuList: any = [];
 
   constructor(
     public fb: FormBuilder,
@@ -49,16 +46,14 @@ export class AddMenuPathComponent {
     private route: ActivatedRoute,
     // public authService: AuthService,
     private notificationService: NotificationService,
-    public menuPathService: MenuPathService,
-    private toastr: ToastrService,
-    private menuService: MenuService,
+    public categoryService: CategoryService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.authInfo();
     this.formInfo();
     this.paramId = this.route.snapshot.params.id;
-    this. getMenuList();
     if (this.paramId) {
       this.isParam()
     };
@@ -67,8 +62,8 @@ export class AddMenuPathComponent {
 
   uiInfo() {
     this.commonService.setUiInfo({
-      title: this.paramId ? 'Update Menu Path List' : 'Add Menu Path List',
-      editPath: '/pos/menu-path/view',
+      title: this.paramId ? 'Update Auto Generate Reports' : 'Add Auto Generate Reports',
+      editPath: '/pos/category/view',
       formId: this.formId,
     });
   }
@@ -80,12 +75,9 @@ export class AddMenuPathComponent {
   }
 
   formInfo() {
-    this.menuPathForm = this.fb.group({
+    this.categoryForm = this.fb.group({
       id: [0],
-      menuId: ['', Validators.required],
-      menu: [''],
-      subMenu: ['', Validators.required],
-      path: ['', Validators.required],
+      name: ['', Validators.required],
       createdBy: [this.loginUser],
       createdDate: [this.currentDate],
       updatedBy: [this.loginUser],
@@ -94,30 +86,13 @@ export class AddMenuPathComponent {
   }
 
   get f() {
-    return this.menuPathForm.controls;
+    return this.categoryForm.controls;
   }
 
-  getMenuList() {
-    // this.asyncService.start();
-    this.subscription =
-    this.menuService.getMenuList().subscribe(getData => {  
-      if (getData['isExecuted'] == true) {          
-      this.menuList = getData['data'] ;
-      }
-      else {
-        this.commonService.showErrorMsg(getData['message']);
-      }
-      // this.asyncService.finish();
-    }, (err) => {
-      // this.asyncService.finish();
-      this.commonService.showErrorMsg(err.message);
-    })
-  };
-
   isParam() {
-     this.menuPathService.getSingleMenuPath(this.paramId).subscribe(singleData=> {
+     this.categoryService.getSingleCategory(this.paramId).subscribe(singleData=> {
        if (singleData['isExecuted'] == true) {
-         this.menuPathForm.patchValue({ ...singleData.data, updatedBy: this.loginUser, updatedDate : this.currentDate});
+         this.categoryForm.patchValue({ ...singleData.data, updatedBy: this.loginUser, updatedDate : this.currentDate});
        }
        else {
          this.commonService.showErrorMsg(singleData['message']);
@@ -128,12 +103,12 @@ export class AddMenuPathComponent {
   };
 
   onSaveConfirmation = (): void => {
-    if ((!this.paramId && this.itemArray.length > 0) || (this.paramId && this.menuPathForm.valid)) {
+    if ((!this.paramId && this.itemArray.length > 0) || (this.paramId && this.categoryForm.valid)) {
       this.commonService.showDialog({
         title: this.paramId ? 'Confirmation - update record' : 'Confirmation - save record',
         content: this.paramId ? 'Do you want to update record?' : 'Do you want to save record?',
       },
-        () => this.paramId ? this.updateMenuPath() : this.addMenuPath()
+        () => this.paramId ? this.updateCategory() : this.addCategory()
       );
     } else {
       this.commonService.showErrorMsg('Table is empty!! Please first add data in array table!');
@@ -147,23 +122,22 @@ export class AddMenuPathComponent {
   addDataToArray() {
     if (this.itemArray) {
       for (let entry of this.itemArray) {
-        if (this.menuPathForm.value.path == entry['path'] || this.menuPathForm.value.menu == entry['menu']) {
+        if (this.categoryForm.value.name == entry['name']) {
           return this.commonService.showErrorMsg('Duplicate Data Found!!!');
         }
       }
     }
-    if (this.menuPathForm.valid) {
-      this.duplicateSub = this.menuPathService.duplicateCheck(this.menuPathForm.value)
+    if (this.categoryForm.valid) {
+      this.duplicateSub = this.categoryService.duplicateCheck(this.categoryForm.value)
         .subscribe((data: any) => {
           if (data['isExecuted'] == false) {
             return this.commonService.showErrorMsg(data['message']);
           } else {
-            this.itemArray.push(this.menuPathForm.value);
-            this.menuPathForm.get('menu')?.setValue(this.menuList.find((x: any)=> x.menuId == this.menuPathForm.value.menuId)?.menu_name);
-            // this.menuPathForm.get('name')?.setValue(null);
-            this.menuPathForm.reset();
-            this.menuPathForm.get('createdBy')?.setValue(this.loginUser);
-            this.menuPathForm.get('createdDate')?.setValue(this.currentDate);
+            this.itemArray.push(this.categoryForm.value);
+            // this.categoryForm.get('name')?.setValue(null);
+            this.categoryForm.reset();
+            this.categoryForm.get('createdBy')?.setValue(this.loginUser);
+            this.categoryForm.get('createdDate')?.setValue(this.currentDate);
             this.formInfo();
           }
         });
@@ -172,13 +146,13 @@ export class AddMenuPathComponent {
     }
   }
 
-  addMenuPath() {
-    this.menuPathService
-      .addMenuPath(this.itemArray).subscribe(
+  addCategory() {
+    this.categoryService
+      .addCategory(this.itemArray).subscribe(
         (add: IApiResponse) => {
           if (add.isExecuted) 
           {
-            this.router.navigateByUrl('/pos/menu-path/view');
+            this.router.navigateByUrl('/pos/category/view');
             this.commonService.showSuccessMsg(add.message)
           } 
           else 
@@ -191,14 +165,14 @@ export class AddMenuPathComponent {
       );
   };
 
-  updateMenuPath() {
-     this.menuPathService
-      .updateMenuPath(this.menuPathForm.value).subscribe(
+  updateCategory() {
+     this.categoryService
+      .updateCategory(this.categoryForm.value).subscribe(
         (add:any) => {
           if (add['isExecuted'])
           {
             this.commonService.showSuccessMsg(add['message'])
-            this.router.navigateByUrl('/pos/menu-path/view');
+            this.router.navigateByUrl('/pos/category/view');
           }
           else
           {
@@ -226,3 +200,4 @@ export class AddMenuPathComponent {
     // this.asyncService.finish();
   }
 }
+

@@ -17,6 +17,7 @@ import { AddUserRoleComponent } from './user-role/add-user-role/add-user-role.co
 import { ViewUserRoleComponent } from './user-role/view-user-role/view-user-role.component';
 import { AddMenuPathComponent } from './menu-path/add-menu-path/add-menu-path.component';
 import { ViewMenuPathComponent } from './menu-path/view-menu-path/view-menu-path.component';
+import { AddAutoGenerateReportComponent } from './auto-generate-report/add-auto-generate-report/add-auto-generate-report.component';
 
 const routes: Routes = [
   
@@ -127,6 +128,13 @@ const routes: Routes = [
         }
       },
       { path: 'user-role/view', component: ViewUserRoleComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }  
+      },
+      { path: 'auto-generate-report', component: AddAutoGenerateReportComponent,
         canActivate: [hasRoleGuard],
         data:
         {

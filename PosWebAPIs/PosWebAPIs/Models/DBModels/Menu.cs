@@ -5,13 +5,12 @@ using System.Collections.Generic;
 
 namespace PosWebAPIs.Models.DBModels
 {
-    public partial class MenuPath
+    public partial class Menu
     {
         public int Id { get; set; }
-        public string PathId { get; set; }
-        public string Path { get; set; }
         public string MenuId { get; set; }
-        public string SubMenu { get; set; }
+        public string MenuName { get; set; }
+        public string MenuPath { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string UpdatedBy { get; set; }

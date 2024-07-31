@@ -18,6 +18,7 @@ namespace PosWebAPIs.Models.DBModels
         }
 
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<MenuPath> MenuPaths { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductPurchaseHistory> ProductPurchaseHistories { get; set; }
@@ -56,6 +57,25 @@ namespace PosWebAPIs.Models.DBModels
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.ToTable("Menu");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.MenuId).HasMaxLength(50);
+
+                entity.Property(e => e.MenuName).HasMaxLength(50);
+
+                entity.Property(e => e.MenuPath).HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<MenuPath>(entity =>
             {
                 entity.ToTable("Menu_Path");
@@ -64,9 +84,13 @@ namespace PosWebAPIs.Models.DBModels
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.MenuId).HasMaxLength(50);
+
                 entity.Property(e => e.Path).HasMaxLength(50);
 
                 entity.Property(e => e.PathId).HasMaxLength(50);
+
+                entity.Property(e => e.SubMenu).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 

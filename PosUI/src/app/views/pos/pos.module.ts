@@ -27,6 +27,7 @@ import { AddMenuPathComponent } from './menu-path/add-menu-path/add-menu-path.co
 import { ViewMenuPathComponent } from './menu-path/view-menu-path/view-menu-path.component';
 import { AddUserRoleComponent } from './user-role/add-user-role/add-user-role.component';
 import { ViewUserRoleComponent } from './user-role/view-user-role/view-user-role.component';
+import { AddAutoGenerateReportComponent } from './auto-generate-report/add-auto-generate-report/add-auto-generate-report.component';
 
 
 
@@ -51,6 +52,7 @@ import { ViewUserRoleComponent } from './user-role/view-user-role/view-user-role
     ViewMenuPathComponent,
     AddUserRoleComponent,
     ViewUserRoleComponent,
+    AddAutoGenerateReportComponent,
   ],
   imports: [
     CommonModule,

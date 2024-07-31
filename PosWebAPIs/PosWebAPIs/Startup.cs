@@ -47,6 +47,7 @@ namespace PosWebAPIs
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IUserRoleService, UserRoleService>();
             services.AddScoped<IMenuPathService, MenuPathService>();
+            services.AddScoped<IMenuService, MenuService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

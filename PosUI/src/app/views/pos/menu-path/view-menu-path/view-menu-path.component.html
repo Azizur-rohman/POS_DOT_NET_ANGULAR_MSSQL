@@ -31,6 +31,16 @@
                   <td mat-cell *matCellDef="let element"> {{element.path_id}} </td>
               </ng-container>
 
+              <ng-container matColumnDef="menu">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Menu Name</th>
+                  <td mat-cell *matCellDef="let element"> {{element.menu_name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="sub_menu">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sub Menu Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.sub_menu}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="path">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Path</th>
                 <td mat-cell *matCellDef="let element"> {{element.path}} </td>

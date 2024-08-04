@@ -20,14 +20,14 @@ import * as moment from 'moment';
 import { MenuService } from '../../services/menu.service';
 
 @Component({
-  selector: 'app-add-menu-path',
-  templateUrl: './add-menu-path.component.html',
-  styleUrls: ['./add-menu-path.component.scss']
+  selector: 'app-add-menu',
+  templateUrl: './add-menu.component.html',
+  styleUrls: ['./add-menu.component.scss']
 })
-export class AddMenuPathComponent {
+export class AddMenuComponent {
 
   public favoriteColor = '#26ab3c';
-  formId = 'menu-path';
+  formId = 'menu';
   menuPathForm: any = FormGroup;
   paramId: number = 0;
   currentDate: any = moment().format('YYYY-MM-DDThh:mm:ssZ');
@@ -40,6 +40,13 @@ export class AddMenuPathComponent {
   // empListSub: Subscription;
   itemArray: any = [];
   menuList: any = [];
+
+  iconComponentList: any =[
+    {name: 'cil-speedometer'},
+    {name: 'cil-file'},
+    {name: 'cilUser'},
+    {name: 'cil-star'},
+  ]
 
   constructor(
     public fb: FormBuilder,
@@ -67,8 +74,8 @@ export class AddMenuPathComponent {
 
   uiInfo() {
     this.commonService.setUiInfo({
-      title: this.paramId ? 'Update Menu Path List' : 'Add Menu Path List',
-      editPath: '/pos/menu-path/view',
+      title: this.paramId ? 'Update Menu List' : 'Add Menu List',
+      editPath: '/pos/menu/view',
       formId: this.formId,
     });
   }
@@ -82,10 +89,13 @@ export class AddMenuPathComponent {
   formInfo() {
     this.menuPathForm = this.fb.group({
       id: [0],
-      menuId: [''],
-      menu: [''],
-      subMenu: [''],
-      path: ['', Validators.required],
+      serialNo: [null, Validators.required],
+      menuName: ['', Validators.required],
+      iconComponent: [''],
+      badgeColor: [''],
+      badgeText: [''],
+      title: [null],
+      menuPath: ['', Validators.required],
       createdBy: [this.loginUser],
       createdDate: [this.currentDate],
       updatedBy: [this.loginUser],
@@ -115,7 +125,7 @@ export class AddMenuPathComponent {
   };
 
   isParam() {
-     this.menuPathService.getSingleMenuPath(this.paramId).subscribe(singleData=> {
+     this.menuService.getSingleMenu(this.paramId).subscribe(singleData=> {
        if (singleData['isExecuted'] == true) {
          this.menuPathForm.patchValue({ ...singleData.data, updatedBy: this.loginUser, updatedDate : this.currentDate});
        }
@@ -153,7 +163,7 @@ export class AddMenuPathComponent {
       }
     }
     if (this.menuPathForm.valid) {
-      this.duplicateSub = this.menuPathService.duplicateCheck(this.menuPathForm.value)
+      this.duplicateSub = this.menuService.duplicateCheck(this.menuPathForm.value)
         .subscribe((data: any) => {
           if (data['isExecuted'] == false) {
             return this.commonService.showErrorMsg(data['message']);
@@ -173,12 +183,12 @@ export class AddMenuPathComponent {
   }
 
   addMenuPath() {
-    this.menuPathService
-      .addMenuPath(this.itemArray).subscribe(
+    this.menuService
+      .addMenu(this.itemArray).subscribe(
         (add: IApiResponse) => {
           if (add.isExecuted) 
           {
-            this.router.navigateByUrl('/pos/menu-path/view');
+            this.router.navigateByUrl('/pos/menu/view');
             this.commonService.showSuccessMsg(add.message)
           } 
           else 
@@ -192,13 +202,13 @@ export class AddMenuPathComponent {
   };
 
   updateMenuPath() {
-     this.menuPathService
-      .updateMenuPath(this.menuPathForm.value).subscribe(
+     this.menuService
+      .updateMenu(this.menuPathForm.value).subscribe(
         (add:any) => {
           if (add['isExecuted'])
           {
             this.commonService.showSuccessMsg(add['message'])
-            this.router.navigateByUrl('/pos/menu-path/view');
+            this.router.navigateByUrl('/pos/menu/view');
           }
           else
           {
@@ -226,3 +236,4 @@ export class AddMenuPathComponent {
     // this.asyncService.finish();
   }
 }
+

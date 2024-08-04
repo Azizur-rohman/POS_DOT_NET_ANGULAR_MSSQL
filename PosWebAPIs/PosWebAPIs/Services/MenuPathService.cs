@@ -34,7 +34,8 @@ namespace PosWebAPIs.Services
         {
             bool isSaved = false;
 
-            var isExistData = _db.MenuPaths.AsQueryable().FirstOrDefault(x => x.SubMenu == model.SubMenu && x.MenuId == model.MenuId && x.Path == model.Path);
+            var isExistData = _db.MenuPaths.AsQueryable().FirstOrDefault(x => x.SubMenu == model.SubMenu 
+                                                                    && x.MenuId == model.MenuId && x.Path == model.Path && x.SerialNo == model.SerialNo);
             if (isExistData == null)
             {
                 var oldData = _db.MenuPaths.FirstOrDefault(x => x.Id == model.Id);
@@ -43,6 +44,7 @@ namespace PosWebAPIs.Services
                     oldData.Path = model.Path;
                     oldData.MenuId = model.MenuId;
                     oldData.SubMenu = model.SubMenu;
+                    oldData.SerialNo = model.SerialNo;
                     oldData.UpdatedBy = model.UpdatedBy;
                     oldData.UpdatedDate = model.UpdatedDate;
 
@@ -71,6 +73,7 @@ namespace PosWebAPIs.Services
                 getData.SubMenu = data.SubMenu;
                 getData.Path = data.Path;
                 getData.PathId = data.PathId;
+                getData.SerialNo = data.SerialNo;
                 getData.CreatedBy = data.CreatedBy;
                 getData.CreatedDate = data.CreatedDate;
                 getData.UpdatedBy = data.UpdatedBy;
@@ -96,6 +99,7 @@ namespace PosWebAPIs.Services
                            sub_menu = ct.SubMenu,
                            path = ct.Path,
                            path_id = ct.PathId,
+                           serialNo = ct.SerialNo,
                            created_by = ct.CreatedBy,
                            created_date = ct.CreatedDate
 
@@ -107,7 +111,7 @@ namespace PosWebAPIs.Services
         public bool DuplicateCheck(ModelContext _db, MenuPath model)
         {
             bool isDuplicate = false;
-            var data = _db.MenuPaths.AsQueryable().FirstOrDefault(x => x.SubMenu == model.SubMenu && x.MenuId == model.MenuId || x.Path == model.Path);
+            var data = _db.MenuPaths.AsQueryable().FirstOrDefault(x => x.SubMenu == model.SubMenu && x.MenuId == model.MenuId && x.Path == model.Path);
             if (data != null)
             {
                 isDuplicate = true;
@@ -143,6 +147,7 @@ namespace PosWebAPIs.Services
                     obj.Path = i.Path;
                     obj.MenuId = i.MenuId;
                     obj.SubMenu = i.SubMenu;
+                    obj.SerialNo = i.SerialNo;
                     obj.PathId = serial;
                     obj.CreatedBy = i.CreatedBy;
                     obj.CreatedDate = i.CreatedDate;

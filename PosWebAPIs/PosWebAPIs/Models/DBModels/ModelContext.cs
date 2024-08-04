@@ -61,9 +61,15 @@ namespace PosWebAPIs.Models.DBModels
             {
                 entity.ToTable("Menu");
 
+                entity.Property(e => e.BadgeColor).HasMaxLength(50);
+
+                entity.Property(e => e.BadgeText).HasMaxLength(50);
+
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.IconComponent).HasMaxLength(50);
 
                 entity.Property(e => e.MenuId).HasMaxLength(50);
 

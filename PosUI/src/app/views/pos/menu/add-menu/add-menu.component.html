@@ -1,0 +1,102 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Menu</strong> <small>Add</small>
+        </c-card-header>
+        <c-card-body>
+          <form
+          [id]="formId"
+          [formGroup]="menuPathForm"
+          (ngSubmit)="onSaveConfirmation()"
+          autocomplete="off"
+        >
+          <c-row>
+
+            <c-col xs="4">
+                Menu Name <span style="color: red;">*</span>
+               <input cFormControl type="text" formControlName="menuName" placeholder="Menu Name..." required 
+               [ngClass]="{'red-border': f.menuName.invalid && (f.menuName.dirty || f.menuName.touched)}"/>
+               <br>
+               <div *ngIf="f.menuName.invalid && (f.menuName.dirty || f.menuName.touched)">
+                 <div *ngIf="f.menuName.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Menu Path is required!!!</div>
+               </div>
+              </c-col>
+          <c-col xs="4">
+           Menu Path <span style="color: red;">*</span>
+          <input cFormControl type="text" formControlName="menuPath" placeholder="Menu path..." required 
+          [ngClass]="{'red-border': f.menuPath.invalid && (f.menuPath.dirty || f.menuPath.touched)}"/>
+          <br>
+          <div *ngIf="f.menuPath.invalid && (f.menuPath.dirty || f.menuPath.touched)">
+            <div *ngIf="f.menuPath.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Menu Path is required!!!</div>
+          </div>
+         </c-col>
+         <c-col xs="4">
+            Icon Component 
+          <select formControlName="iconComponent" cSelect>
+              <option *ngFor="let option of iconComponentList" [value]="option.name">{{ option.name }}</option>
+          </select>
+         </c-col>
+         <c-col xs="4">
+          Badge Color
+         <input cFormControl type="text" formControlName="badgeColor" placeholder="Badge Color..."/>
+         </c-col>
+         <c-col xs="4">
+            Badge Text 
+           <input cFormControl type="text" formControlName="badgeText" placeholder="Badge Text..."/>
+           </c-col>
+           <c-col xs="4">
+            Serial No <span style="color: red;">*</span>
+           <input cFormControl type="number" formControlName="serialNo" placeholder="Serial No..." required 
+           [ngClass]="{'red-border': f.serialNo.invalid && (f.serialNo.dirty || f.serialNo.touched)}"/>
+           <br>
+           <div *ngIf="f.serialNo.invalid && (f.serialNo.dirty || f.serialNo.touched)">
+            <div *ngIf="f.serialNo.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Serial No is required!!!</div>
+          </div>
+           </c-col>
+           <c-col xs="4">
+            Title <br>
+           <input style="margin-top: 10px; margin-left: 5px; height: 15px; width: 15px;" type="checkbox" formControlName="title">
+           </c-col>
+          </c-row>
+          <c-row >
+            <c-col xs="3">
+              <button cButton style="color: white;" color="primary" *ngIf="!paramId" (click)="addDataToArray()">Add More</button>
+            </c-col>
+          </c-row>
+        </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <mat-card class="mat-card-gap"  *ngIf="!paramId">
+    <table class="report-table">
+      <tr>
+        <th style="text-align: center;">Srl #</th>
+        <th style="text-align: center;">Menu Name</th>
+        <th style="text-align: center;">Menu Path</th>
+        <th style="text-align: center;">Icon Component</th>
+        <th style="text-align: center;">Badge Color</th>
+        <th style="text-align: center;">Badge Text</th>
+        <th style="text-align: center;">Title</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+      <tr *ngFor="let item of itemArray; let i = index">
+        <td style="text-align: center;">{{ i + 1 }}</td>
+        <td>{{ item.menuName }}</td>
+        <td>{{ item.menuPath }}</td>
+        <td>{{ item.iconComponent }}</td>
+        <td>{{ item.badgeColor }}</td>
+        <td>{{ item.badgeText }}</td>
+        <td>{{ item.title }}</td>
+        <td style="text-align: center">
+          <mat-icon (click)="onDeleteItem(i)" class="delete-record-btn"
+            >cancel</mat-icon
+          >
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  
+  

@@ -31,7 +31,7 @@ import { MenuService } from '../../pos/services/menu.service';
 })
 export class LoginComponent {
 
-  formId = 'lfa-due-date';
+  formId = 'login';
   userForm = new FormGroup({
     name: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -42,7 +42,6 @@ export class LoginComponent {
   inputValue: string= '';
   roleData: any = [];
   menuData: any = [];
-  menuPathData: any = [];
   displayBranch: string = '';
   displayDesig: string = '';
   displayJoin: any;
@@ -101,7 +100,6 @@ export class LoginComponent {
     // this.uiInfo();
     this.getUserRoleList();
     this.getMenuList();
-    this.getMenuPathList();
   }
   getUserRoleList() {
     this.UserRoleService.getUserRoleList().subscribe(getData => {  
@@ -119,14 +117,6 @@ export class LoginComponent {
       });
   };
 
-  getMenuPathList() {
-    this.menuPathService.getMenuPathList().subscribe(getData => {  
-        if (getData['isExecuted'] == true) {          
-        this.menuPathData = getData['data'] ;
-        }
-      });
-  };
-
   checkLogin() {
     if(this.userForm.valid){
     this.loginService
@@ -139,11 +129,14 @@ export class LoginComponent {
             localStorage.setItem("isLoggedin", JSON.stringify(this.loginUser));
             localStorage.setItem("hasRole", JSON.stringify(this.roleData));
             localStorage.setItem("menu", JSON.stringify(this.menuData));
-            localStorage.setItem("menuPath", JSON.stringify(this.menuPathData));
             this.updateUser();
             this.userActivityService.startLoginTimer();
             this.commonService.removeSessionExpiredMsg();
-            this.router.navigateByUrl('/dashboard');
+            // this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/dashboard').then(() => {
+              // After navigation is done, reload the page
+              window.location.reload();
+            });
           } 
           else 
           {

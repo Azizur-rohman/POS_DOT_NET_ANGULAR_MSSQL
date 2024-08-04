@@ -40,7 +40,7 @@ export class DefaultTitlebarComponent extends HeaderComponent implements OnInit 
     this.uiInfoSub = this.commonService.uiInfo.subscribe((uiInfo: any) => {
       this.uiInfo = uiInfo;
       this.changeDetectorRef.detectChanges();
-      console.log('this.uiInfo', this.uiInfo);
+      // console.log('this.uiInfo', this.uiInfo);
       
     });
     

@@ -1,0 +1,26 @@
+.mat-card-gap{
+    padding: 10px;
+    margin-top: -10px;
+}
+
+
+th{
+    background-color: #274a97;
+    color: white;
+    padding: 10px;
+    border: 1px solid rgb(182, 182, 182);
+}
+
+tr:nth-child(odd){
+    background-color: rgb(205, 247, 247);
+}
+
+td{
+border: 1px solid rgb(182, 182, 182);
+}
+
+.red-border {
+    border: 1px solid red;
+  }
+
+

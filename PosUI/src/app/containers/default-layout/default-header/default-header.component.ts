@@ -71,7 +71,6 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
     this.uiInfoSub = this.commonService.uiInfo.subscribe((uiInfo: any) => {
       this.uiInfo = uiInfo;
       this.changeDetectorRef.detectChanges();
-      
     });
     
     // this.asyncSub = this.asyncService.isLoading.subscribe(loading => {
@@ -126,9 +125,10 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit{
     await this.loginTimeCount();
     localStorage.setItem("isLoggedin", "false");
     localStorage.setItem("hasRole", "null");
+    localStorage.setItem("menu", "null");
     this.userActivityService.logout();
     this.updateUser();
-    this.router.navigate(['login']);
+    this.router.navigateByUrl('login');
   }
 
   updateUser() {

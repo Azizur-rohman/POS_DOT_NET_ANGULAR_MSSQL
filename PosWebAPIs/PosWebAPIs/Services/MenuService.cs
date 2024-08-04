@@ -34,13 +34,24 @@ namespace PosWebAPIs.Services
         {
             bool isSaved = false;
 
-            var isExistData = _db.Menus.AsQueryable().FirstOrDefault(x => x.MenuName == model.MenuName && x.MenuPath == model.MenuPath);
+            var isExistData = _db.Menus.AsQueryable().FirstOrDefault(x => x.MenuName == model.MenuName 
+                                                                    && x.MenuPath == model.MenuPath 
+                                                                    && x.IconComponent == model.IconComponent 
+                                                                    && x.BadgeColor == model.BadgeColor 
+                                                                    && x.BadgeText == model.BadgeText 
+                                                                    && x.Title == model.Title
+                                                                    && x.SerialNo == model.SerialNo);
             if (isExistData == null)
             {
                 var oldData = _db.Menus.FirstOrDefault(x => x.Id == model.Id);
                 if (oldData != null)
                 {
                     oldData.MenuName = model.MenuName;
+                    oldData.SerialNo = model.SerialNo;
+                    oldData.IconComponent = model.IconComponent;
+                    oldData.BadgeColor = model.BadgeColor;
+                    oldData.BadgeText = model.BadgeText;
+                    oldData.Title = model.Title;
                     oldData.MenuPath = model.MenuPath;
                     oldData.UpdatedBy = model.UpdatedBy;
                     oldData.UpdatedDate = model.UpdatedDate;
@@ -67,8 +78,13 @@ namespace PosWebAPIs.Services
 
                 getData.Id = data.Id;
                 getData.MenuName = data.MenuName;
+                getData.SerialNo = data.SerialNo;
                 getData.MenuPath = data.MenuPath;
                 getData.MenuId = data.MenuId;
+                getData.IconComponent = data.IconComponent;
+                getData.BadgeColor = data.BadgeColor;
+                getData.BadgeText = data.BadgeText;
+                getData.Title = data.Title;
                 getData.CreatedBy = data.CreatedBy;
                 getData.CreatedDate = data.CreatedDate;
                 getData.UpdatedBy = data.UpdatedBy;
@@ -90,19 +106,25 @@ namespace PosWebAPIs.Services
                        {
                            id = (decimal)ct.Id,
                            menu_name = ct.MenuName,
+                           serialNo = ct.SerialNo,
                            menu_path = ct.MenuPath,
                            menu_id = ct.MenuId,
+                           title = ct.Title,
+                           iconComponent = ct.IconComponent,
+                           badgeColor = ct.BadgeColor,
+                           badgeText = ct.BadgeText,
                            created_by = ct.CreatedBy,
                            created_date = ct.CreatedDate,
                            children = _db.MenuPaths.AsQueryable().Where(x => x.MenuId == ct.MenuId)
                                      .Select(x=> new {
                                          name = x.SubMenu,
-                                         url = ct.MenuPath + "/" + x.Path
-                                     }).ToList(),
+                                         url = ct.MenuPath + "/" + x.Path,
+                                         serialNo = x.SerialNo
+                                     }).ToList().OrderBy(x=> x.serialNo),
 
                        };
 
-            return data.Distinct().OrderBy(x=>x.created_date);
+            return data.Distinct().OrderBy(x=>x.serialNo);
         }
 
         public bool DuplicateCheck(ModelContext _db, Menu model)
@@ -142,8 +164,13 @@ namespace PosWebAPIs.Services
                 var obj = new Menu();
                 {
                     obj.MenuName = i.MenuName;
+                    obj.SerialNo = i.SerialNo;
                     obj.MenuPath = i.MenuPath;
                     obj.MenuId = serial;
+                    obj.IconComponent = i.IconComponent;
+                    obj.BadgeColor = i.BadgeColor;
+                    obj.BadgeText = i.BadgeText;
+                    obj.Title = i.Title;
                     obj.CreatedBy = i.CreatedBy;
                     obj.CreatedDate = i.CreatedDate;
                 }

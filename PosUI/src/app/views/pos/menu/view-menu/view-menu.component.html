@@ -26,24 +26,39 @@
                 <td mat-cell style="text-align: center; padding-right: 25px;" *matCellDef="let element; let i = index;"> {{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="path_id">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Path Id</th>
-                  <td mat-cell *matCellDef="let element"> {{element.path_id}} </td>
+              <ng-container matColumnDef="menu_id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Id</th>
+                  <td mat-cell *matCellDef="let element"> {{element.menu_id}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="menu">
+              <ng-container matColumnDef="menuName">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Menu Name</th>
                   <td mat-cell *matCellDef="let element"> {{element.menu_name}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="sub_menu">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sub Menu Name</th>
-                <td mat-cell *matCellDef="let element"> {{element.sub_menu}} </td>
+            <ng-container matColumnDef="menuPath">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Path</th>
+                <td mat-cell *matCellDef="let element"> {{element.menu_path}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="path">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Path</th>
-                <td mat-cell *matCellDef="let element"> {{element.path}} </td>
+            <ng-container matColumnDef="iconComponent">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Icon Component</th>
+                <td mat-cell *matCellDef="let element"> {{element.iconComponent}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="badgeColor">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Badge Color</th>
+                <td mat-cell *matCellDef="let element"> {{element.badgeColor}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="badgeText">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Badge Text</th>
+                <td mat-cell *matCellDef="let element"> {{element.badgeText}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
             </ng-container>
 
             <ng-container matColumnDef="serialNo">

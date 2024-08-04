@@ -14,25 +14,24 @@
           <c-row>
 
           <c-col xs="4">
-            Menu Name <span style="color: red;">*</span>
-          <select formControlName="menuId" cSelect required 
-          [ngClass]="{'red-border': f.menuId.invalid && (f.menuId.dirty || f.menuId.touched)}">
-              <option *ngFor="let option of menuList" [value]="option.menu_id">{{ option.menu_name }}</option>
+            Menu Name
+          <select formControlName="menuId" cSelect>
+          <option value="" selected>--Select Menu--</option>
+           <option *ngFor="let option of menuList" [value]="option.menu_id">{{ option.menu_name }}</option>
           </select>
-          <br>
+          <!-- <br>
           <div *ngIf="f.menuId.invalid && (f.menuId.dirty || f.menuId.touched)">
             <div *ngIf="f.menuId.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Menu Select is required!!!</div>
-          </div>
+          </div> -->
           </c-col>
 
           <c-col xs="4">
-           Sub Menu Name <span style="color: red;">*</span>
-          <input cFormControl type="text" formControlName="subMenu" placeholder="Sub Menu name..." required 
-          [ngClass]="{'red-border': f.subMenu.invalid && (f.subMenu.dirty || f.subMenu.touched)}"/>
-          <br>
+           Sub Menu Name
+          <input cFormControl type="text" formControlName="subMenu" placeholder="Sub Menu name..."/>
+          <!-- <br>
           <div *ngIf="f.subMenu.invalid && (f.subMenu.dirty || f.subMenu.touched)">
             <div *ngIf="f.subMenu.errors.required" style="margin-top: -20px; font-size: 12px; color: red;">Menu Name is required!!!</div>
-          </div>
+          </div> -->
           </c-col>
           <c-col xs="4">
            Sub Menu Path <span style="color: red;">*</span>

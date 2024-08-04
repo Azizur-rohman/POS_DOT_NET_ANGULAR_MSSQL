@@ -18,6 +18,8 @@ import { ViewUserRoleComponent } from './user-role/view-user-role/view-user-role
 import { AddMenuPathComponent } from './menu-path/add-menu-path/add-menu-path.component';
 import { ViewMenuPathComponent } from './menu-path/view-menu-path/view-menu-path.component';
 import { AddAutoGenerateReportComponent } from './auto-generate-report/add-auto-generate-report/add-auto-generate-report.component';
+import { ViewMenuComponent } from './menu/view-menu/view-menu.component';
+import { AddMenuComponent } from './menu/add-menu/add-menu.component';
 
 const routes: Routes = [
   
@@ -135,6 +137,20 @@ const routes: Routes = [
         }  
       },
       { path: 'auto-generate-report', component: AddAutoGenerateReportComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }  
+      },
+      { path: 'menu', component: AddMenuComponent,
+        canActivate: [hasRoleGuard],
+        data:
+        {
+          role:[]
+        }
+      },
+      { path: 'menu/view', component: ViewMenuComponent,
         canActivate: [hasRoleGuard],
         data:
         {

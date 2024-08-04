@@ -1,4 +1,4 @@
-<c-row ngPreserveWhitespaces>
+<!-- <c-row ngPreserveWhitespaces>
     <c-col xs="12">
       <c-card class="mb-4">
         <c-card-header>
@@ -50,6 +50,131 @@
         </td>
       </tr>
     </table>
-  </mat-card>
-  
-  
+  </mat-card>-->
+
+  <div class="layout">
+    <div class="app-sidebar">
+      <nav>
+        <ul>
+          <li>
+            <form
+              [id]="formId"
+              [formGroup]="autoReportForm"
+              (ngSubmit)="onSaveConfirmation()"
+              autocomplete="off"
+            >
+            <c-row>
+              <c-col xs="12">
+                Report Main Item
+                <select formControlName="mainItem" cSelect (change)="mainItem($event)">
+                  <option value="" selected>--Select Item--</option>
+                   <option *ngFor="let option of mainItems" [value]="option.code">{{ option.desc }}</option>
+                  </select>
+              </c-col>
+              <c-col *ngIf="header" xs="12">
+                  Header Item
+                  <select formControlName="headerItem" cSelect (change)="headItem($event)">
+                    <option value="" selected>--Select Item--</option>
+                     <option *ngFor="let option of items" [value]="option.code">{{ option.desc }}</option>
+                    </select>
+              </c-col>
+                <c-col *ngIf="footer" xs="12">
+                  Footer Item
+                  <select formControlName="footerItem" cSelect>
+                    <option value="" selected>--Select Item--</option>
+                    <option *ngFor="let option of items" [value]="option.code">{{ option.desc }}</option>
+                    </select>
+              </c-col>
+              <c-col *ngIf="body" xs="12">
+                Body Item
+                <select formControlName="bodyItem" cSelect>
+                  <option value="" selected>--Select Item--</option>
+                  <option *ngFor="let option of items" [value]="option.code">{{ option.desc }}</option>
+                  </select>
+                </c-col>
+                <c-col *ngIf="body || header || footer" xs="6">
+                  Body Font Size
+                  <input cFormControl formControlName="bodyFontSize" type="number">
+                </c-col>
+                <c-col *ngIf="(body && columns) || (header && columns) || (footer && columns)" xs="6">
+                  Column Size
+                  <input cFormControl formControlName="columnSize" type="number" (change)="headColumnItems(0)">
+                </c-col>
+            </c-row>
+
+            <ng-container *ngIf="columns">
+            <c-row *ngFor="let option of columnSizeArr; let i = index" style="margin-top: 10px;">
+              <h3 style="text-align: center;">Column {{i+1}}</h3>
+              <c-col xs="6">
+                Column Text
+                <input cFormControl formControlName="columnText" type="text" (change)="headColumnItems(i)">
+              </c-col>
+              <c-col xs="6">
+                Column Align
+                <select formControlName="columnAlign" cSelect (change)="headColumnItems(i)">
+                  <option value="" selected>--Select Item--</option>
+                   <option *ngFor="let option of alignElements" [value]="option.code">{{ option.desc }}</option>
+                  </select>
+              </c-col>
+              <c-col xs="6">
+                Column Bold
+                <input formControlName="columnBold" style="margin-top: 10px; margin-left: 5px; height: 15px; width: 15px;" type="checkbox" (change)="headColumnItems(i)">
+              </c-col>
+              <c-row *ngIf="columns" style="margin-top: 10px;">
+                <c-col xs="6">
+                  Margin Left
+                  <input cFormControl formControlName="marginLeft" type="number" (change)="columns ? headColumnItems(i) : null">
+                </c-col>
+                <c-col xs="6">
+                  Margin Top
+                  <input cFormControl formControlName="marginTop" type="number" (change)="columns ? headColumnItems(i) : null">
+                </c-col>
+                <c-col xs="6">
+                  Margin Right
+                  <input cFormControl formControlName="marginRight" type="number" (change)="columns ? headColumnItems(i) : null">
+                </c-col>
+                <c-col xs="6">
+                  Margin Botom
+                  <input cFormControl formControlName="marginBottom" type="number" (change)="columns ? headColumnItems(i) : null">
+                </c-col>
+              </c-row>
+            </c-row>
+          </ng-container>
+
+            <c-row *ngIf="margins" style="margin-top: 10px;">
+              <c-col xs="6">
+                Margin Left
+                <input cFormControl formControlName="marginLeft" type="number" (change)="headMarginItems()">
+              </c-col>
+              <c-col xs="6">
+                Margin Top
+                <input cFormControl formControlName="marginTop" type="number" (change)="headMarginItems()">
+              </c-col>
+              <c-col xs="6">
+                Margin Right
+                <input cFormControl formControlName="marginRight" type="number" (change)="headMarginItems()">
+              </c-col>
+              <c-col xs="6">
+                Margin Botom
+                <input cFormControl formControlName="marginBottom" type="number" (change)="headMarginItems()">
+              </c-col>
+            </c-row>
+            <c-row style="margin-top: 10px;">
+              <c-col xs="12">
+                <button cButton style="color: white;" color="primary" (click)="generateReport()">Generate PDF</button>
+              </c-col>
+            </c-row>
+            </form>
+          </li>
+          <li><a routerLink="/page2" routerLinkActive="active">Page 2</a></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="content">
+      <div class="canvas-container">
+        <div id="pdfContainer"></div>
+      </div>
+    </div>
+  </div>

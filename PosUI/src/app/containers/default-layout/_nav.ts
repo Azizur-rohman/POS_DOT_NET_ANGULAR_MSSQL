@@ -1,9 +1,10 @@
 import { INavData } from '@coreui/angular';
 let menu: any = localStorage.getItem('menu');
 let menuData: any = menu ? JSON.parse(menu) : [];
-
-let menuPath: any = localStorage.getItem('menuPath');
-let menuPathData: any = menuPath ? JSON.parse(menuPath) : [];
+// setInterval(() => {
+//   menu = localStorage.getItem('menu');
+//   menuData = menu ? JSON.parse(menu) : [];
+// }, 1000);
 export const staticNavItems: INavData[] = [
 //   // {
 //   //   name: 'Dashboard',
@@ -94,17 +95,25 @@ export const staticNavItems: INavData[] = [
 ];
 
 // Dynamically add menu items from menuData
-const dynamicMenuItems = menuData.sort((a: any, b: any) => (a.menuId > b.menuId ? 1 : -1)).map((p: any) => ({
+const dynamicMenuItems = menuData?.map((p: any) => ({
   name: p.menu_name,
   url: p.menu_path,
-  children: [...p.children]
+  children: [...p.children],
+  iconComponent: { name: p.iconComponent ? p.iconComponent : null },
+  badge: {
+      color: p.badgeColor ? p.badgeColor : null,
+      text: p.badgeText ? p.badgeText : null
+    },
+  title: p.title ? p.title : null
 }));
 
 // const dynamicMenuPathItems = menuPathData.map((p: any) => ({
 //   name: p.menu_name,
 //   url: '/pos/' + p.path
 // }));
-staticNavItems.push(...dynamicMenuItems)
+if (dynamicMenuItems) {
+  staticNavItems.push(...dynamicMenuItems);
+}
 
 // Add dynamic menu items to the 'User Settings' children
 // staticNavItems.find(item => item.name === 'Pos')!.children!.push(...dynamicMenuPathItems);

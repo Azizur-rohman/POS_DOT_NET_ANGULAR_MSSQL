@@ -12,14 +12,15 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment';
 import { MenuPathService } from '../../services/menu-path.service';
+import { MenuService } from '../../services/menu.service';
 pdfMake!.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  selector: 'app-view-menu-path',
-  templateUrl: './view-menu-path.component.html',
-  styleUrls: ['./view-menu-path.component.scss']
+  selector: 'app-view-menu',
+  templateUrl: './view-menu.component.html',
+  styleUrls: ['./view-menu.component.scss']
 })
-export class ViewMenuPathComponent {
+export class ViewMenuComponent {
 
   subscription?      : Subscription;
   delSub?            : Subscription;
@@ -27,10 +28,13 @@ export class ViewMenuPathComponent {
   message           : string = '';
   displayedColumns = [
     'index',
-    'path_id',
-    'menu', 
-    'sub_menu', 
-    'path', 
+    'menu_id',
+    'menuName', 
+    'menuPath', 
+    'iconComponent', 
+    'badgeText',
+    'badgeColor',
+    'title',
     'serialNo',
     'created_by',
     'created_date',
@@ -45,7 +49,7 @@ export class ViewMenuPathComponent {
     public commonService: CommonService,
     // public asyncService: AsyncService,
     private router: Router,
-    public menuPathService: MenuPathService,
+    public menuService: MenuService,
     private notificationService: NotificationService,
   ) { }
 
@@ -61,17 +65,17 @@ export class ViewMenuPathComponent {
 
   uiInfo() {
     this.commonService.setUiInfo({ 
-      title: 'View Menu Path List',
-      goBackPath: '/pos/menu-path', 
-      refreshPath: '/pos/menu-path/view',
-      addNewPath: '/pos/menu-path'
+      title: 'View Menu List',
+      goBackPath: '/pos/menu', 
+      refreshPath: '/pos/menu/view',
+      addNewPath: '/pos/menu'
     })
   };
 
   getMenuPathList() {
     // this.asyncService.start();
     this.subscription =
-    this.menuPathService.getMenuPathList().subscribe(getData => {  
+    this.menuService.getMenuList().subscribe(getData => {  
       if (getData['isExecuted'] == true) {          
       this.dataSource.data = getData['data'] ;
       }
@@ -86,12 +90,12 @@ export class ViewMenuPathComponent {
   };
 
   updateRecord(element: any) {
-    this.router.navigate(['/pos/menu-path', { id: element.id }]);
+    this.router.navigate(['/pos/menu', { id: element.id }]);
   };
 
   deleteMenuPath(element: any) {
     this.delSub =
-    this.menuPathService.deleteMenuPath(element.id).subscribe((res: any) => {
+    this.menuService.deleteMenu(element.id).subscribe((res: any) => {
       if (res['isExecuted'] == true) {
         this.commonService.showSuccessMsg(res['message']);
         this.ngOnInit();
@@ -172,7 +176,7 @@ export class ViewMenuPathComponent {
               // },
               {
                 // text: headerText,
-                text: 'Category List',
+                text: 'Menu List',
                 fontSize: 20,
                 bold: true,
                 alignment: 'center',
@@ -191,13 +195,13 @@ export class ViewMenuPathComponent {
               body: [
                 [
                   { text: ['Srl No.'], alignment: 'center', bold: true, style: 'tableHeader' },
-                  { text: ['Category'], alignment: 'center', bold: true, style: 'tableHeader' },
+                  { text: ['Menu'], alignment: 'center', bold: true, style: 'tableHeader' },
                   { text: ['Created By'], alignment: 'center', bold: true, style: 'tableHeader' },
                   { text: ['Created Date'], alignment: 'center', bold: true, style: 'tableHeader' }
                 ],
                 ...this.dataSource.data.map((p: any, i) => [
                   {text: i +1, alignment: 'center' },
-                  {text: p.name ? this.dataInitcap(p.name) : '',
+                  {text: p.menu_name ? this.dataInitcap(p.menu_name) : '',
                   alignment: 'center',
                   },
                   {text: p.created_by ? this.dataInitcap(p.created_by) : '',
@@ -270,4 +274,5 @@ export class ViewMenuPathComponent {
   };
 
 }
+
 

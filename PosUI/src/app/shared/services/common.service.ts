@@ -18,7 +18,7 @@ export class CommonService {
     title: '',
     formId: '',
     goBackPath: '/',
-    refreshPath: '/',
+    refreshPath: '/'
   };
 
   public notifyLeaveAprCount: any = 0;
